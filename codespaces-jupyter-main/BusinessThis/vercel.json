@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "name": "businessthis",
+  "builds": [
+    {
+      "src": "landing_page.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/landing_page.html"
+    },
+    {
+      "src": "/app",
+      "dest": "/app_preview.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "landing_page.html": {
+      "maxDuration": 10
+    }
+  }
+}
