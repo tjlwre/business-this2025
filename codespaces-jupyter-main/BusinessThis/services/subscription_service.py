@@ -162,11 +162,12 @@ class SubscriptionService:
                 expires_at = (datetime.utcnow() + timedelta(days=30)).isoformat()
             
             # Set AI usage limits
-            ai_usage_limit = 0
+            # Set AI usage limits based on tier (Ollama is free to run)
+            ai_usage_limit = 25  # Free tier gets 25 queries per month
             if tier == 'premium':
-                ai_usage_limit = 50
+                ai_usage_limit = 100  # Premium gets 100 queries per month
             elif tier == 'pro':
-                ai_usage_limit = -1  # Unlimited
+                ai_usage_limit = -1  # Pro gets unlimited queries
             
             update_data = {
                 'subscription_tier': tier,
@@ -254,7 +255,7 @@ class SubscriptionService:
                     'Financial health score',
                     'Basic reports'
                 ],
-                'ai_usage_limit': 0
+                'ai_usage_limit': 25  # Free tier gets 25 queries per month
             },
             'premium': {
                 'name': 'Premium',
@@ -267,7 +268,7 @@ class SubscriptionService:
                     'Email notifications',
                     '50 AI interactions/month'
                 ],
-                'ai_usage_limit': 50
+                'ai_usage_limit': 100  # Premium gets 100 queries per month
             },
             'pro': {
                 'name': 'Pro',
@@ -281,6 +282,6 @@ class SubscriptionService:
                     'White-label options',
                     'Unlimited AI interactions'
                 ],
-                'ai_usage_limit': -1
+                'ai_usage_limit': -1  # Pro gets unlimited queries
             }
         }

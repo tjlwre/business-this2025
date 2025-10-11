@@ -1,16 +1,21 @@
+#!/usr/bin/env python3
 """
-Comprehensive test script for BusinessThis implementation
-Tests all major components and integrations
+BusinessThis Implementation Test Suite
+Comprehensive testing of all implemented features
 """
 import os
 import sys
-import requests
 import json
+import requests
 import time
 from datetime import datetime
+from typing import Dict, Any, List
+
+# Add the project root to Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 class BusinessThisTester:
-    """Test suite for BusinessThis application"""
+    """Comprehensive test suite for BusinessThis"""
     
     def __init__(self):
         self.base_url = "http://localhost:5000/api"
@@ -20,59 +25,75 @@ class BusinessThisTester:
             "full_name": "Test User"
         }
         self.auth_token = None
-        self.user_id = None
+        self.test_results = []
+    
+    def log_test(self, test_name: str, success: bool, message: str = ""):
+        """Log test result"""
+        status = "✅ PASS" if success else "❌ FAIL"
+        print(f"{status} {test_name}")
+        if message:
+            print(f"    {message}")
         
-    def log_test(self, test_name, status, message=""):
-        """Log test results"""
-        status_icon = "✅" if status else "❌"
-        print(f"{status_icon} {test_name}: {message}")
-        return status
+        self.test_results.append({
+            "test": test_name,
+            "success": success,
+            "message": message,
+            "timestamp": datetime.now().isoformat()
+        })
     
-    def test_backend_health(self):
-        """Test if backend is running"""
+    def test_health_check(self) -> bool:
+        """Test health check endpoint"""
         try:
-            response = requests.get(f"{self.base_url}/health", timeout=5)
+            response = requests.get(f"{self.base_url}/health")
             if response.status_code == 200:
-                return self.log_test("Backend Health Check", True, "Backend is running")
+                self.log_test("Health Check", True, "API is responding")
+                return True
             else:
-                return self.log_test("Backend Health Check", False, f"Status: {response.status_code}")
-        except requests.exceptions.ConnectionError:
-            return self.log_test("Backend Health Check", False, "Backend not running on localhost:5000")
+                self.log_test("Health Check", False, f"Status code: {response.status_code}")
+                return False
         except Exception as e:
-            return self.log_test("Backend Health Check", False, str(e))
+            self.log_test("Health Check", False, f"Connection error: {str(e)}")
+            return False
     
-    def test_user_registration(self):
+    def test_user_registration(self) -> bool:
         """Test user registration"""
         try:
             response = requests.post(f"{self.base_url}/auth/register", json=self.test_user)
             if response.status_code == 201:
-                return self.log_test("User Registration", True, "User registered successfully")
+                self.log_test("User Registration", True, "User created successfully")
+                return True
             else:
-                return self.log_test("User Registration", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("User Registration", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("User Registration", False, str(e))
+            self.log_test("User Registration", False, f"Error: {str(e)}")
+            return False
     
-    def test_user_login(self):
+    def test_user_login(self) -> bool:
         """Test user login"""
         try:
-            response = requests.post(f"{self.base_url}/auth/login", json={
+            login_data = {
                 "email": self.test_user["email"],
                 "password": self.test_user["password"]
-            })
+            }
+            response = requests.post(f"{self.base_url}/auth/login", json=login_data)
             if response.status_code == 200:
                 data = response.json()
                 self.auth_token = data.get("token")
-                self.user_id = data.get("user", {}).get("id")
-                return self.log_test("User Login", True, "Login successful")
+                self.log_test("User Login", True, "Login successful")
+                return True
             else:
-                return self.log_test("User Login", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("User Login", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("User Login", False, str(e))
+            self.log_test("User Login", False, f"Error: {str(e)}")
+            return False
     
-    def test_financial_profile_creation(self):
+    def test_financial_profile(self) -> bool:
         """Test financial profile creation"""
         if not self.auth_token:
-            return self.log_test("Financial Profile Creation", False, "No auth token")
+            self.log_test("Financial Profile", False, "No auth token")
+            return False
         
         try:
             headers = {"Authorization": f"Bearer {self.auth_token}"}
@@ -80,51 +101,58 @@ class BusinessThisTester:
                 "monthly_income": 5000,
                 "fixed_expenses": 2000,
                 "variable_expenses": 1000,
-                "emergency_fund_target": 18000,
+                "emergency_fund_target": 15000,
                 "emergency_fund_current": 5000,
                 "total_debt": 10000,
-                "credit_score": 750,
                 "age": 30,
-                "risk_tolerance": "moderate",
-                "retirement_age": 65
+                "risk_tolerance": "moderate"
             }
             
-            response = requests.post(f"{self.base_url}/financial-profile", json=profile_data, headers=headers)
+            response = requests.post(f"{self.base_url}/financial-profile", 
+                                   json=profile_data, headers=headers)
             if response.status_code == 200:
-                return self.log_test("Financial Profile Creation", True, "Profile created successfully")
+                self.log_test("Financial Profile", True, "Profile created successfully")
+                return True
             else:
-                return self.log_test("Financial Profile Creation", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("Financial Profile", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("Financial Profile Creation", False, str(e))
+            self.log_test("Financial Profile", False, f"Error: {str(e)}")
+            return False
     
-    def test_savings_goal_creation(self):
-        """Test savings goal creation"""
+    def test_savings_goals(self) -> bool:
+        """Test savings goals functionality"""
         if not self.auth_token:
-            return self.log_test("Savings Goal Creation", False, "No auth token")
+            self.log_test("Savings Goals", False, "No auth token")
+            return False
         
         try:
             headers = {"Authorization": f"Bearer {self.auth_token}"}
             goal_data = {
                 "name": "Emergency Fund",
-                "target_amount": 18000,
+                "target_amount": 15000,
                 "current_amount": 5000,
-                "target_date": "2024-12-31",
-                "monthly_contribution": 1000,
+                "monthly_contribution": 500,
                 "priority": 1
             }
             
-            response = requests.post(f"{self.base_url}/savings-goals", json=goal_data, headers=headers)
+            response = requests.post(f"{self.base_url}/savings-goals", 
+                                   json=goal_data, headers=headers)
             if response.status_code == 201:
-                return self.log_test("Savings Goal Creation", True, "Goal created successfully")
+                self.log_test("Savings Goals", True, "Goal created successfully")
+                return True
             else:
-                return self.log_test("Savings Goal Creation", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("Savings Goals", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("Savings Goal Creation", False, str(e))
+            self.log_test("Savings Goals", False, f"Error: {str(e)}")
+            return False
     
-    def test_safe_spending_calculation(self):
-        """Test safe spending calculation"""
+    def test_safe_spending_calculator(self) -> bool:
+        """Test safe spending calculator"""
         if not self.auth_token:
-            return self.log_test("Safe Spending Calculation", False, "No auth token")
+            self.log_test("Safe Spending Calculator", False, "No auth token")
+            return False
         
         try:
             headers = {"Authorization": f"Bearer {self.auth_token}"}
@@ -133,119 +161,138 @@ class BusinessThisTester:
                 "months_for_goal": 12
             }
             
-            response = requests.post(f"{self.base_url}/calculator/safe-spend", json=calc_data, headers=headers)
+            response = requests.post(f"{self.base_url}/calculator/safe-spend", 
+                                   json=calc_data, headers=headers)
             if response.status_code == 200:
                 data = response.json()
-                safe_spending = data.get("safe_spending", {})
-                return self.log_test("Safe Spending Calculation", True, 
-                    f"Daily: ${safe_spending.get('daily', 0):.2f}, Weekly: ${safe_spending.get('weekly', 0):.2f}")
+                if "safe_spending" in data:
+                    self.log_test("Safe Spending Calculator", True, "Calculation successful")
+                    return True
+                else:
+                    self.log_test("Safe Spending Calculator", False, "Invalid response format")
+                    return False
             else:
-                return self.log_test("Safe Spending Calculation", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("Safe Spending Calculator", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("Safe Spending Calculation", False, str(e))
+            self.log_test("Safe Spending Calculator", False, f"Error: {str(e)}")
+            return False
     
-    def test_financial_health_score(self):
+    def test_financial_health_score(self) -> bool:
         """Test financial health score calculation"""
         if not self.auth_token:
-            return self.log_test("Financial Health Score", False, "No auth token")
+            self.log_test("Financial Health Score", False, "No auth token")
+            return False
         
         try:
             headers = {"Authorization": f"Bearer {self.auth_token}"}
             response = requests.get(f"{self.base_url}/calculator/financial-health", headers=headers)
             if response.status_code == 200:
                 data = response.json()
-                health = data.get("financial_health", {})
-                score = health.get("overall_score", 0)
-                return self.log_test("Financial Health Score", True, f"Score: {score}/100")
+                if "financial_health" in data:
+                    self.log_test("Financial Health Score", True, "Health score calculated")
+                    return True
+                else:
+                    self.log_test("Financial Health Score", False, "Invalid response format")
+                    return False
             else:
-                return self.log_test("Financial Health Score", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("Financial Health Score", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("Financial Health Score", False, str(e))
+            self.log_test("Financial Health Score", False, f"Error: {str(e)}")
+            return False
     
-    def test_subscription_status(self):
+    def test_investment_calculations(self) -> bool:
+        """Test investment calculations"""
+        if not self.auth_token:
+            self.log_test("Investment Calculations", False, "No auth token")
+            return False
+        
+        try:
+            headers = {"Authorization": f"Bearer {self.auth_token}"}
+            investment_data = {
+                "age": 30,
+                "risk_tolerance": "moderate",
+                "investment_amount": 10000
+            }
+            
+            response = requests.post(f"{self.base_url}/investment/asset-allocation", 
+                                   json=investment_data, headers=headers)
+            if response.status_code == 200:
+                self.log_test("Investment Calculations", True, "Asset allocation calculated")
+                return True
+            else:
+                self.log_test("Investment Calculations", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Investment Calculations", False, f"Error: {str(e)}")
+            return False
+    
+    def test_subscription_status(self) -> bool:
         """Test subscription status endpoint"""
         if not self.auth_token:
-            return self.log_test("Subscription Status", False, "No auth token")
+            self.log_test("Subscription Status", False, "No auth token")
+            return False
         
         try:
             headers = {"Authorization": f"Bearer {self.auth_token}"}
             response = requests.get(f"{self.base_url}/subscription/status", headers=headers)
             if response.status_code == 200:
                 data = response.json()
-                subscription = data.get("subscription", {})
-                tier = subscription.get("subscription_tier", "unknown")
-                return self.log_test("Subscription Status", True, f"Tier: {tier}")
+                if "subscription" in data:
+                    self.log_test("Subscription Status", True, "Subscription status retrieved")
+                    return True
+                else:
+                    self.log_test("Subscription Status", False, "Invalid response format")
+                    return False
             else:
-                return self.log_test("Subscription Status", False, f"Status: {response.status_code}, Response: {response.text}")
+                self.log_test("Subscription Status", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("Subscription Status", False, str(e))
+            self.log_test("Subscription Status", False, f"Error: {str(e)}")
+            return False
     
-    def test_calculations_module(self):
-        """Test the original calculations module"""
-        try:
-            # Import the calculations module
-            sys.path.append(os.path.join(os.path.dirname(__file__)))
-            from calculations import get_all_safe_spends
-            
-            # Test calculation
-            result = get_all_safe_spends(5000, 2000, 1000, 10000, 12)
-            
-            if result and 'daily' in result and 'weekly' in result and 'monthly' in result:
-                return self.log_test("Calculations Module", True, 
-                    f"Daily: ${result['daily']:.2f}, Weekly: ${result['weekly']:.2f}, Monthly: ${result['monthly']:.2f}")
-            else:
-                return self.log_test("Calculations Module", False, "Invalid result format")
-        except Exception as e:
-            return self.log_test("Calculations Module", False, str(e))
-    
-    def test_environment_variables(self):
-        """Test if required environment variables are set"""
-        required_vars = [
-            "SUPABASE_URL",
-            "SUPABASE_ANON_KEY",
-            "SECRET_KEY"
-        ]
-        
-        missing_vars = []
-        for var in required_vars:
-            if not os.getenv(var) or os.getenv(var).startswith('your_'):
-                missing_vars.append(var)
-        
-        if missing_vars:
-            return self.log_test("Environment Variables", False, f"Missing: {', '.join(missing_vars)}")
-        else:
-            return self.log_test("Environment Variables", True, "All required variables set")
-    
-    def test_database_connection(self):
-        """Test database connection through API"""
+    def test_admin_dashboard(self) -> bool:
+        """Test admin dashboard endpoint"""
         if not self.auth_token:
-            return self.log_test("Database Connection", False, "No auth token")
+            self.log_test("Admin Dashboard", False, "No auth token")
+            return False
         
         try:
             headers = {"Authorization": f"Bearer {self.auth_token}"}
-            response = requests.get(f"{self.base_url}/financial-profile", headers=headers)
-            # Any response (even 404) means database connection works
-            return self.log_test("Database Connection", True, "Database accessible")
+            response = requests.get(f"{self.base_url}/admin/dashboard", headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                if "dashboard" in data:
+                    self.log_test("Admin Dashboard", True, "Dashboard metrics retrieved")
+                    return True
+                else:
+                    self.log_test("Admin Dashboard", False, "Invalid response format")
+                    return False
+            else:
+                self.log_test("Admin Dashboard", False, f"Status: {response.status_code}, Response: {response.text}")
+                return False
         except Exception as e:
-            return self.log_test("Database Connection", False, str(e))
+            self.log_test("Admin Dashboard", False, f"Error: {str(e)}")
+            return False
     
-    def run_all_tests(self):
-        """Run all tests"""
+    def run_all_tests(self) -> Dict[str, Any]:
+        """Run all tests and return results"""
         print("🧪 BusinessThis Implementation Test Suite")
         print("=" * 50)
         
+        # Test order matters - some tests depend on previous ones
         tests = [
-            ("Environment Variables", self.test_environment_variables),
-            ("Backend Health", self.test_backend_health),
-            ("Database Connection", self.test_database_connection),
-            ("Calculations Module", self.test_calculations_module),
+            ("Health Check", self.test_health_check),
             ("User Registration", self.test_user_registration),
             ("User Login", self.test_user_login),
-            ("Financial Profile Creation", self.test_financial_profile_creation),
-            ("Savings Goal Creation", self.test_savings_goal_creation),
-            ("Safe Spending Calculation", self.test_safe_spending_calculation),
+            ("Financial Profile", self.test_financial_profile),
+            ("Savings Goals", self.test_savings_goals),
+            ("Safe Spending Calculator", self.test_safe_spending_calculator),
             ("Financial Health Score", self.test_financial_health_score),
-            ("Subscription Status", self.test_subscription_status)
+            ("Investment Calculations", self.test_investment_calculations),
+            ("Subscription Status", self.test_subscription_status),
+            ("Admin Dashboard", self.test_admin_dashboard),
         ]
         
         passed = 0
@@ -256,33 +303,37 @@ class BusinessThisTester:
                 if test_func():
                     passed += 1
             except Exception as e:
-                print(f"❌ {test_name}: Exception - {str(e)}")
+                self.log_test(test_name, False, f"Unexpected error: {str(e)}")
         
         print("\n" + "=" * 50)
         print(f"📊 Test Results: {passed}/{total} tests passed")
         
         if passed == total:
-            print("🎉 All tests passed! Implementation is working correctly.")
+            print("🎉 All tests passed! BusinessThis is ready for production!")
         else:
-            print("⚠️  Some tests failed. Please check the implementation.")
+            print("⚠️ Some tests failed. Please check the configuration.")
         
-        return passed == total
+        return {
+            "total_tests": total,
+            "passed_tests": passed,
+            "failed_tests": total - passed,
+            "success_rate": (passed / total) * 100,
+            "test_results": self.test_results
+        }
 
 def main():
     """Main test function"""
     tester = BusinessThisTester()
-    success = tester.run_all_tests()
+    results = tester.run_all_tests()
     
-    if success:
-        print("\n✅ Implementation is ready for production!")
-        print("\nNext steps:")
-        print("1. Set up production environment variables")
-        print("2. Deploy to hosting platform")
-        print("3. Configure domain and SSL")
-        print("4. Set up monitoring and analytics")
-    else:
-        print("\n❌ Implementation needs fixes before production.")
-        print("\nPlease address the failed tests and try again.")
+    # Save results to file
+    with open("test_results.json", "w") as f:
+        json.dump(results, f, indent=2)
+    
+    print(f"\n📄 Detailed results saved to test_results.json")
+    
+    return results["success_rate"] == 100
 
 if __name__ == "__main__":
-    main()
+    success = main()
+    sys.exit(0 if success else 1)

@@ -5,8 +5,8 @@
 stripe>=7.0.0
 paypalrestsdk>=1.13.0
 
-# AI and machine learning
-openai>=1.0.0
+# AI and machine learning (Ollama integration)
+requests>=2.31.0
 
 # Email services
 sendgrid>=6.10.0

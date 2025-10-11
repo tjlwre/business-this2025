@@ -24,7 +24,7 @@ A comprehensive financial planning application that helps users calculate safe s
 - **Flask**: Python web framework
 - **Supabase**: Database and authentication
 - **Stripe**: Payment processing
-- **OpenAI API**: AI-powered financial coaching
+- **Ollama**: Local AI-powered financial coaching (Mistral 7B)
 - **JWT**: Secure authentication
 
 ### Frontend
@@ -38,7 +38,7 @@ A comprehensive financial planning application that helps users calculate safe s
 - Python 3.8+
 - Supabase account
 - Stripe account (for payments)
-- OpenAI API key (for AI features)
+- Ollama installed locally (for AI features)
 
 ### Installation
 
