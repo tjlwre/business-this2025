@@ -13,15 +13,15 @@ from functools import wraps
 
 # Import our modules
 from config.supabase_config import get_supabase_client, get_supabase_service_client
-from models.user import User
-from models.financial_profile import FinancialProfile
-from models.savings_goal import SavingsGoal
-from models.transaction import Transaction
-from services.auth_service import AuthService
-from services.financial_service import FinancialService
-from services.subscription_service import SubscriptionService
-from utils.validators import validate_email, validate_financial_data
-from utils.decorators import require_auth, require_subscription
+from core.models.user import User
+from core.models.financial_profile import FinancialProfile
+from core.models.savings_goal import SavingsGoal
+from core.models.transaction import Transaction
+from core.services.auth_service import AuthService
+from core.services.financial_service import FinancialService
+from core.services.subscription_service import SubscriptionService
+from core.utils.validators import validate_email, validate_financial_data
+from core.utils.decorators import require_auth, require_subscription
 
 # Initialize Flask app
 app = Flask(__name__)

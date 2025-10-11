@@ -1,1 +1,1 @@
-# Frontend components module
+# UI Components package

@@ -49,13 +49,32 @@ A comprehensive financial planning application that helps users calculate safe s
    ```
 
 2. **Install dependencies**
+   
+   For development:
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements/dev.txt
+   ```
+   
+   For production:
+   ```bash
+   pip install -r requirements/prod.txt
+   ```
+   
+   Or install specific components:
+   ```bash
+   # Backend only
+   pip install -r requirements/backend.txt
+   
+   # Frontend only
+   pip install -r requirements/frontend.txt
+   
+   # With integrations
+   pip install -r requirements/integrations.txt
    ```
 
 3. **Set up environment variables**
    ```bash
-   cp env.example .env
+   cp config/env.example .env
    ```
    
    Edit `.env` with your credentials:
@@ -88,37 +107,90 @@ A comprehensive financial planning application that helps users calculate safe s
 6. **Access the application**
    - Frontend: http://localhost:8501
    - Backend API: http://localhost:5000
+   - Admin Dashboard: `python admin/dashboard.py`
+
+## Utility Scripts
+
+The project includes several utility scripts for setup and management:
+
+### Database Setup
+```bash
+python scripts/setup_database.py
+```
+
+### Create Admin User
+```bash
+python scripts/create_admin.py
+```
+
+### Seed Test Data
+```bash
+python scripts/seed_data.py
+```
+
+### Admin Dashboard
+```bash
+python admin/dashboard.py
+```
 
 ## Project Structure
 
 ```
 BusinessThis/
-├── backend/                 # Flask backend
-│   ├── app.py              # Main Flask application
-│   └── ...
 ├── frontend/               # Streamlit frontend
-│   └── app.py              # Main Streamlit application
-├── models/                 # Data models
-│   ├── user.py
-│   ├── financial_profile.py
-│   ├── savings_goal.py
-│   └── transaction.py
-├── services/               # Business logic
-│   ├── auth_service.py
-│   ├── financial_service.py
-│   └── subscription_service.py
-├── utils/                  # Utilities
-│   ├── validators.py
-│   └── decorators.py
+│   ├── app.py              # Main Streamlit application
+│   ├── pages/              # Page components (future)
+│   └── components/         # Reusable components (future)
+├── backend/                # Flask backend
+│   ├── app.py              # Main Flask application
+│   ├── routes/             # API route modules (future)
+│   └── middleware/         # Middleware components (future)
+├── core/                   # Shared business logic
+│   ├── models/             # Data models
+│   │   ├── user.py
+│   │   ├── financial_profile.py
+│   │   ├── savings_goal.py
+│   │   └── transaction.py
+│   ├── services/           # Business services
+│   │   ├── auth_service.py
+│   │   ├── financial_service.py
+│   │   └── subscription_service.py
+│   ├── utils/              # Utility functions
+│   │   ├── validators.py
+│   │   └── decorators.py
+│   └── calculations.py     # Financial calculations
 ├── config/                 # Configuration
-│   └── supabase_config.py
+│   ├── settings.py         # Centralized settings
+│   ├── supabase_config.py # Database configuration
+│   └── env.example         # Environment template
 ├── database/               # Database schema
 │   └── schema.sql
-├── calculations.py        # Original calculator logic
-├── requirements.txt        # Python dependencies
-├── run_backend.py         # Backend startup script
-├── run_frontend.py        # Frontend startup script
-└── README.md              # This file
+├── integrations/           # External service integrations
+│   ├── stripe_integration.py
+│   ├── paypal_integration.py
+│   ├── openai_integration.py
+│   ├── plaid_integration.py
+│   └── sendgrid_integration.py
+├── admin/                  # Admin dashboard
+│   └── dashboard.py        # Admin interface
+├── tests/                  # Test suites (future)
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
+├── scripts/                # Utility scripts
+│   ├── setup_database.py
+│   ├── create_admin.py
+│   └── seed_data.py
+├── requirements/           # Modular dependencies
+│   ├── base.txt
+│   ├── backend.txt
+│   ├── frontend.txt
+│   ├── integrations.txt
+│   ├── dev.txt
+│   └── prod.txt
+├── run_backend.py          # Backend startup script
+├── run_frontend.py         # Frontend startup script
+└── README.md               # This file
 ```
 
 ## API Endpoints

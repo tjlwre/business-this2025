@@ -8,7 +8,7 @@ from config.supabase_config import get_supabase_client
 from models.financial_profile import FinancialProfile
 from models.savings_goal import SavingsGoal
 from models.transaction import Transaction
-from calculations import get_all_safe_spends
+from core.calculations import get_all_safe_spends
 
 class FinancialService:
     """Financial service for calculations and data management"""
