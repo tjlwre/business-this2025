@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - BusinessThis</title>
+    <meta name="description" content="BusinessThis Privacy Policy - Learn how we protect and use your personal and financial information.">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --primary-blue-light: #1e40af;
+            --primary-green: #065f46;
+            --primary-green-light: #047857;
+            --accent-gold: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .header-section p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .last-updated {
+            background: var(--accent-gold);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Content */
+        .content-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .content-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+            color: var(--text-dark);
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .content-section ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .highlight-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-btn {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .header-section h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-chart-line"></i>
+                BusinessThis
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/app">App</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy and data security are our top priorities. This policy explains how we collect, use, and protect your information.</p>
+            <div class="last-updated">Last Updated: January 15, 2025</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-section">
+            <h2>1. Information We Collect</h2>
+            <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support.</p>
+            
+            <h3>Personal Information</h3>
+            <ul>
+                <li>Name and email address</li>
+                <li>Account credentials and preferences</li>
+                <li>Payment and billing information</li>
+                <li>Communication records with our support team</li>
+            </ul>
+
+            <h3>Financial Information</h3>
+            <ul>
+                <li>Income and expense data you input</li>
+                <li>Savings goals and financial objectives</li>
+                <li>Spending patterns and budget information</li>
+                <li>Financial health scores and calculations</li>
+            </ul>
+
+            <h3>Technical Information</h3>
+            <ul>
+                <li>Device information and IP address</li>
+                <li>Usage patterns and app interactions</li>
+                <li>Cookies and similar tracking technologies</li>
+                <li>Error logs and performance data</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>2. How We Use Your Information</h2>
+            <p>We use your information to provide, maintain, and improve our services:</p>
+            
+            <h3>Service Delivery</h3>
+            <ul>
+                <li>Calculate your safe spending amounts</li>
+                <li>Track your savings goals and progress</li>
+                <li>Provide personalized financial insights</li>
+                <li>Generate reports and analytics</li>
+            </ul>
+
+            <h3>Communication</h3>
+            <ul>
+                <li>Send important service updates and notifications</li>
+                <li>Provide customer support and respond to inquiries</li>
+                <li>Share educational content and financial tips</li>
+                <li>Send marketing communications (with your consent)</li>
+            </ul>
+
+            <h3>Service Improvement</h3>
+            <ul>
+                <li>Analyze usage patterns to improve our platform</li>
+                <li>Develop new features and functionality</li>
+                <li>Conduct research and analytics</li>
+                <li>Ensure security and prevent fraud</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>3. Information Sharing and Disclosure</h2>
+            <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
+            
+            <h3>Service Providers</h3>
+            <p>We may share information with trusted third-party service providers who assist us in operating our platform, such as:</p>
+            <ul>
+                <li>Payment processors (Stripe, PayPal)</li>
+                <li>Email service providers (SendGrid)</li>
+                <li>Analytics services (Google Analytics)</li>
+                <li>Cloud storage providers (AWS, Supabase)</li>
+            </ul>
+
+            <h3>Legal Requirements</h3>
+            <p>We may disclose your information if required by law or to:</p>
+            <ul>
+                <li>Comply with legal obligations</li>
+                <li>Respond to lawful requests from authorities</li>
+                <li>Protect our rights and property</li>
+                <li>Prevent fraud or security threats</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Important:</strong> We never share your financial data with third parties for marketing purposes. Your financial information is used solely to provide our services to you.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>4. Data Security</h2>
+            <p>We implement industry-standard security measures to protect your information:</p>
+            
+            <h3>Encryption</h3>
+            <ul>
+                <li>All data is encrypted in transit using TLS 1.3</li>
+                <li>Financial data is encrypted at rest using AES-256</li>
+                <li>Database connections are encrypted and secured</li>
+                <li>API communications use secure protocols</li>
+            </ul>
+
+            <h3>Access Controls</h3>
+            <ul>
+                <li>Multi-factor authentication for all staff</li>
+                <li>Role-based access to sensitive data</li>
+                <li>Regular security audits and penetration testing</li>
+                <li>Employee training on data protection</li>
+            </ul>
+
+            <h3>Infrastructure Security</h3>
+            <ul>
+                <li>Secure cloud hosting with enterprise-grade security</li>
+                <li>Regular security updates and patches</li>
+                <li>Intrusion detection and monitoring systems</li>
+                <li>Backup and disaster recovery procedures</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>5. Your Rights and Choices</h2>
+            <p>You have the following rights regarding your personal information:</p>
+            
+            <h3>Access and Portability</h3>
+            <ul>
+                <li>Request a copy of your personal data</li>
+                <li>Export your financial data in standard formats</li>
+                <li>View your account information and settings</li>
+            </ul>
+
+            <h3>Correction and Updates</h3>
+            <ul>
+                <li>Update your personal information at any time</li>
+                <li>Correct inaccurate or incomplete data</li>
+                <li>Modify your privacy preferences</li>
+            </ul>
+
+            <h3>Deletion and Restriction</h3>
+            <ul>
+                <li>Delete your account and associated data</li>
+                <li>Restrict processing of your information</li>
+                <li>Object to certain uses of your data</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Note:</strong> You can exercise these rights by contacting us at privacy@businessthis.com or through your account settings.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>6. Data Retention</h2>
+            <p>We retain your information for as long as necessary to provide our services and comply with legal obligations:</p>
+            
+            <ul>
+                <li><strong>Account Data:</strong> Retained while your account is active and for 3 years after closure</li>
+                <li><strong>Financial Data:</strong> Retained for 7 years for tax and regulatory compliance</li>
+                <li><strong>Communication Records:</strong> Retained for 3 years for customer support purposes</li>
+                <li><strong>Analytics Data:</strong> Anonymized and retained for up to 2 years</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>7. International Transfers</h2>
+            <p>Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place:</p>
+            
+            <ul>
+                <li>Standard Contractual Clauses (SCCs) with service providers</li>
+                <li>Adequacy decisions by relevant authorities</li>
+                <li>Certification under privacy frameworks</li>
+                <li>Explicit consent for specific transfers</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>8. Children's Privacy</h2>
+            <p>Our services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>9. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by:</p>
+            
+            <ul>
+                <li>Posting the updated policy on our website</li>
+                <li>Sending email notifications to registered users</li>
+                <li>Displaying prominent notices in our app</li>
+                <li>Obtaining consent for significant changes</li>
+            </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Questions About Your Privacy?</h2>
+            <p>If you have any questions about this Privacy Policy or our data practices, please contact us.</p>
+            <a href="/contact" class="contact-btn">
+                <i class="fas fa-envelope"></i>
+                Contact Us
+            </a>
+        </div>
+    </div>
+</body>
+</html>

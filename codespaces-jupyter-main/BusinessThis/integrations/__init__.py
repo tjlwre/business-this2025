@@ -1,1 +1,1 @@
-# External integrations module
+# Integrations module

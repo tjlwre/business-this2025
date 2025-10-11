@@ -23,10 +23,10 @@ def get_supabase_service_client() -> Client:
     """Get Supabase service client for admin operations"""
     try:
         url = os.getenv('SUPABASE_URL')
-        key = os.getenv('SUPABASE_SERVICE_ROLE_KEY')
+        key = os.getenv('SUPABASE_SERVICE_KEY')
         
         if not url or not key:
-            raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set")
+            raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_KEY must be set")
         
         return create_client(url, key)
     except Exception as e:
@@ -49,6 +49,6 @@ def get_supabase_config() -> dict:
     return {
         'url': os.getenv('SUPABASE_URL'),
         'anon_key': os.getenv('SUPABASE_ANON_KEY'),
-        'service_role_key': os.getenv('SUPABASE_SERVICE_ROLE_KEY'),
+        'service_role_key': os.getenv('SUPABASE_SERVICE_KEY'),
         'jwt_secret': os.getenv('SUPABASE_JWT_SECRET')
     }

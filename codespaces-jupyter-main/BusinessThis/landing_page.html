@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: dark)">
     <title>BusinessThis - Smart Financial Planning That Actually Works</title>
     <meta name="description" content="Take control of your finances with BusinessThis. Calculate safe spending, track savings goals, and build wealth with AI-powered financial coaching. Start free today!">
     <meta name="keywords" content="financial planning, budgeting, savings calculator, financial health, money management, personal finance">
@@ -94,6 +96,7 @@
             left: 0;
             right: 0;
             background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-light);
             z-index: 1000;
@@ -330,6 +333,8 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             background: white;
+            -webkit-user-select: text;
+            user-select: text;
         }
 
         .form-group input:focus {
@@ -721,6 +726,73 @@
             color: #9ca3af;
         }
 
+        /* Pricing button styles */
+        .pricing-btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Budget breakdown styles */
+        .budget-breakdown {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .budget-title {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .budget-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .budget-label {
+            width: 120px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .budget-bar {
+            flex: 1;
+            height: 2rem;
+            border-radius: 1rem;
+            margin: 0 1rem;
+            position: relative;
+        }
+
+        .budget-fixed {
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+        }
+
+        .budget-savings {
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-green-light));
+        }
+
+        .budget-variable {
+            background: linear-gradient(90deg, #6b7280, #9ca3af);
+        }
+
+        .budget-safe {
+            background: linear-gradient(90deg, var(--accent-gold), #fbbf24);
+        }
+
+        .budget-amount {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -907,30 +979,30 @@
                     </div>
                 </div>
                 
-                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow-md);">
-                    <h3 style="color: var(--text-dark); margin-bottom: 1.5rem; font-size: 1.25rem;">Monthly Budget Breakdown</h3>
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        <div style="width: 120px; font-weight: 500; color: var(--text-dark);">Fixed Expenses</div>
-                        <div style="flex: 1; height: 2rem; background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light)); border-radius: 1rem; margin: 0 1rem; position: relative;">
-                            <div style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: white; font-weight: 600;" id="chart-fixed">$2,000</div>
+                <div class="budget-breakdown">
+                    <h3 class="budget-title">Monthly Budget Breakdown</h3>
+                    <div class="budget-row">
+                        <div class="budget-label">Fixed Expenses</div>
+                        <div class="budget-bar budget-fixed">
+                            <div class="budget-amount" id="chart-fixed">$2,000</div>
                         </div>
                     </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        <div style="width: 120px; font-weight: 500; color: var(--text-dark);">Savings Goal</div>
-                        <div style="flex: 1; height: 2rem; background: linear-gradient(90deg, var(--primary-green), var(--primary-green-light)); border-radius: 1rem; margin: 0 1rem; position: relative;">
-                            <div style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: white; font-weight: 600;" id="chart-savings">$1,000</div>
+                    <div class="budget-row">
+                        <div class="budget-label">Savings Goal</div>
+                        <div class="budget-bar budget-savings">
+                            <div class="budget-amount" id="chart-savings">$1,000</div>
                         </div>
                     </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        <div style="width: 120px; font-weight: 500; color: var(--text-dark);">Variable Expenses</div>
-                        <div style="flex: 1; height: 2rem; background: linear-gradient(90deg, #6b7280, #9ca3af); border-radius: 1rem; margin: 0 1rem; position: relative;">
-                            <div style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: white; font-weight: 600;" id="chart-variable">$800</div>
+                    <div class="budget-row">
+                        <div class="budget-label">Variable Expenses</div>
+                        <div class="budget-bar budget-variable">
+                            <div class="budget-amount" id="chart-variable">$800</div>
                         </div>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 120px; font-weight: 500; color: var(--text-dark);">Safe Monthly Spend</div>
-                        <div style="flex: 1; height: 2rem; background: linear-gradient(90deg, var(--accent-gold), #fbbf24); border-radius: 1rem; margin: 0 1rem; position: relative;">
-                            <div style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: white; font-weight: 600;" id="chart-safe">$1,400</div>
+                    <div class="budget-row">
+                        <div class="budget-label">Safe Monthly Spend</div>
+                        <div class="budget-bar budget-safe">
+                            <div class="budget-amount" id="chart-safe">$1,400</div>
                         </div>
                     </div>
                 </div>
@@ -1013,7 +1085,7 @@
                         <li><i class="fas fa-check"></i> Financial health score</li>
                         <li><i class="fas fa-check"></i> Basic reports</li>
                     </ul>
-                    <a href="/app" class="btn-secondary" style="width: 100%; text-align: center; margin-top: 1rem;" target="_blank">Get Started Free</a>
+                    <a href="/app" class="btn-secondary pricing-btn" target="_blank">Get Started Free</a>
                 </div>
                 
                 <div class="pricing-card featured">
@@ -1028,7 +1100,7 @@
                         <li><i class="fas fa-check"></i> Email notifications</li>
                         <li><i class="fas fa-check"></i> 50 AI interactions/month</li>
                     </ul>
-                    <a href="/app" class="btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;" target="_blank">Start Premium Trial</a>
+                    <a href="/app" class="btn-primary pricing-btn" target="_blank">Start Premium Trial</a>
                 </div>
                 
                 <div class="pricing-card">
@@ -1044,7 +1116,7 @@
                         <li><i class="fas fa-check"></i> White-label options</li>
                         <li><i class="fas fa-check"></i> Unlimited AI interactions</li>
                     </ul>
-                    <a href="/app" class="btn-secondary" style="width: 100%; text-align: center; margin-top: 1rem;" target="_blank">Start Pro Trial</a>
+                    <a href="/app" class="btn-secondary pricing-btn" target="_blank">Start Pro Trial</a>
                 </div>
             </div>
         </div>

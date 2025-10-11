@@ -3,18 +3,42 @@
   "name": "businessthis",
   "builds": [
     {
-      "src": "landing_page.html",
+      "src": "*.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/",
-      "dest": "/landing_page.html"
+      "dest": "/index.html"
     },
     {
       "src": "/app",
-      "dest": "/app_preview.html"
+      "dest": "/app.html"
+    },
+    {
+      "src": "/pricing",
+      "dest": "/pricing.html"
+    },
+    {
+      "src": "/about",
+      "dest": "/about.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "/terms.html"
+    },
+    {
+      "src": "/demo",
+      "dest": "/landing_page.html"
     }
   ],
   "headers": [
@@ -36,12 +60,22 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
         }
       ]
     }
   ],
+  "rewrites": [
+    {
+      "source": "/404",
+      "destination": "/404.html"
+    }
+  ],
   "functions": {
-    "landing_page.html": {
+    "*.html": {
       "maxDuration": 10
     }
   }

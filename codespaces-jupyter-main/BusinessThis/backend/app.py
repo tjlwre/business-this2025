@@ -17,18 +17,18 @@ from core.models.user import User
 from core.models.financial_profile import FinancialProfile
 from core.models.savings_goal import SavingsGoal
 from core.models.transaction import Transaction
-from core.services.auth_service import AuthService
-from core.services.financial_service import FinancialService
-from core.services.subscription_service import SubscriptionService
-from core.services.investment_service import InvestmentService
-from core.services.ai_service import AIService
-from core.services.admin_service import AdminService
-from core.services.reports_service import ReportsService
-from core.services.email_service import EmailService
-from core.services.affiliate_service import AffiliateService
-from core.services.course_service import CourseService
-from core.services.multi_user_service import MultiUserService
-from core.services.advisor_service import AdvisorService
+from services.auth_service import AuthService
+from services.financial_service import FinancialService
+from services.subscription_service import SubscriptionService
+from services.investment_service import InvestmentService
+from services.ai_service import AIService
+from services.admin_service import AdminService
+from services.reports_service import ReportsService
+from services.email_service import EmailService
+from services.affiliate_service import AffiliateService
+from services.course_service import CourseService
+from services.multi_user_service import MultiUserService
+from services.advisor_service import AdvisorService
 from core.utils.validators import validate_email, validate_financial_data
 from core.utils.decorators import require_auth, require_subscription
 

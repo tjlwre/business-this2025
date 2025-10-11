@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BusinessThis</title>
+    <meta name="description" content="Learn about BusinessThis - the financial planning platform helping thousands of users take control of their money and build wealth.">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --primary-blue-light: #1e40af;
+            --primary-green: #065f46;
+            --primary-green-light: #047857;
+            --accent-gold: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+        }
+
+        .story-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .story-text p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-image {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            border-radius: 1rem;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .mission-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .mission-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            background: var(--bg-light);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .member-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .member-title {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+        }
+
+        .values-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem;
+            background: var(--bg-light);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .value-item h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .value-item p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-chart-line"></i>
+                BusinessThis
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/app">App</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>About BusinessThis</h1>
+            <p>We're on a mission to democratize financial planning and help everyone build wealth, regardless of their financial background.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$2.3M</div>
+                    <div class="stat-label">Saved by Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4.9/5</div>
+                    <div class="stat-label">User Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Goal Achievement Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <h2>Our Story</h2>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>BusinessThis was born from a simple frustration: traditional financial planning tools were either too complex for everyday people or too expensive for those who needed them most.</p>
+                    
+                    <p>Our founder, Sarah Chen, spent years as a financial advisor watching clients struggle with basic budgeting and savings goals. She realized that most people don't need complex investment strategies – they need simple, actionable tools to understand their spending and reach their financial goals.</p>
+                    
+                    <p>In 2022, we launched BusinessThis with a revolutionary approach: AI-powered financial coaching that adapts to each user's unique situation, combined with intuitive tools that make financial planning accessible to everyone.</p>
+                </div>
+                <div class="story-image">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <h2>Our Mission</h2>
+            <p>To empower every person with the tools, knowledge, and confidence to take control of their financial future, regardless of their starting point or financial background.</p>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">SC</div>
+                    <div class="member-name">Sarah Chen</div>
+                    <div class="member-title">Founder & CEO</div>
+                    <div class="member-bio">Former Goldman Sachs financial advisor with 12 years of experience helping individuals and families build wealth. MBA from Wharton.</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">MJ</div>
+                    <div class="member-name">Michael Rodriguez</div>
+                    <div class="member-title">CTO</div>
+                    <div class="member-bio">Former Google engineer specializing in AI and machine learning. Led development of our proprietary financial coaching algorithms.</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">EL</div>
+                    <div class="member-name">Emily Liu</div>
+                    <div class="member-title">Head of Product</div>
+                    <div class="member-bio">UX designer with 8 years of experience at fintech companies. Focused on making complex financial concepts simple and actionable.</div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">DR</div>
+                    <div class="member-name">David Kim</div>
+                    <div class="member-title">Head of Security</div>
+                    <div class="member-bio">Former NSA cybersecurity expert ensuring your financial data is protected with bank-level security measures.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security First</h3>
+                    <p>Your financial data is protected with bank-level encryption and security measures. We never share your information with third parties.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Accessibility</h3>
+                    <p>Financial planning should be accessible to everyone, regardless of income level or financial background. Our tools are designed for all users.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>We continuously innovate to bring you the latest in AI-powered financial coaching and cutting-edge planning tools.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>User-Centric</h3>
+                    <p>Every feature we build is designed with our users' needs in mind. We listen to feedback and continuously improve our platform.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Join Our Mission</h2>
+            <p>Be part of the financial revolution. Start your journey to financial freedom today.</p>
+            <div class="cta-buttons">
+                <a href="/app" class="btn-white">
+                    <i class="fas fa-rocket"></i>
+                    Get Started Free
+                </a>
+                <a href="/contact" class="btn-white">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

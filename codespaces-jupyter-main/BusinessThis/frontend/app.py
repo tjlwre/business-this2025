@@ -498,7 +498,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Configuration
-API_BASE_URL = "http://localhost:5000/api"
+import os
+API_BASE_URL = os.getenv('API_BASE_URL', 'http://localhost:5000/api')
 
 class BusinessThisApp:
     """Main application class"""

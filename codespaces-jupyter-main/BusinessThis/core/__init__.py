@@ -1,1 +1,1 @@
-# Core business logic module
+# Core module for BusinessThis
