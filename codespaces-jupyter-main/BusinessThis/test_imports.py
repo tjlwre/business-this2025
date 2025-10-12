@@ -23,20 +23,20 @@ def main():
     print("🔍 Testing BusinessThis Imports")
     print("=" * 50)
     
-    # Test core services
-    core_services = [
-        ("core.services.auth_service", "AuthService"),
-        ("core.services.financial_service", "FinancialService"),
-        ("core.services.subscription_service", "SubscriptionService"),
-        ("core.services.investment_service", "InvestmentService"),
-        ("core.services.ai_service", "AIService"),
-        ("core.services.admin_service", "AdminService"),
-        ("core.services.reports_service", "ReportsService"),
-        ("core.services.email_service", "EmailService"),
-        ("core.services.affiliate_service", "AffiliateService"),
-        ("core.services.course_service", "CourseService"),
-        ("core.services.multi_user_service", "MultiUserService"),
-        ("core.services.advisor_service", "AdvisorService"),
+    # Test services (they're in /services/ not /core/services/)
+    services = [
+        ("services.auth_service", "AuthService"),
+        ("services.financial_service", "FinancialService"),
+        ("services.subscription_service", "SubscriptionService"),
+        ("services.investment_service", "InvestmentService"),
+        ("services.ai_service", "AIService"),
+        ("services.admin_service", "AdminService"),
+        ("services.reports_service", "ReportsService"),
+        ("services.email_service", "EmailService"),
+        ("services.affiliate_service", "AffiliateService"),
+        ("services.course_service", "CourseService"),
+        ("services.multi_user_service", "MultiUserService"),
+        ("services.advisor_service", "AdvisorService"),
     ]
     
     # Test models
@@ -70,7 +70,7 @@ def main():
     ]
     
     all_tests = [
-        ("Core Services", core_services),
+        ("Services", services),
         ("Models", models),
         ("Integrations", integrations),
         ("Config", config_modules),
