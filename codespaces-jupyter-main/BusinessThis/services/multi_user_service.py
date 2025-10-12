@@ -6,6 +6,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 from decimal import Decimal
 import json
+import logging
 
 class MultiUserService:
     """Multi-user service for family plans and enterprise accounts"""

@@ -19,7 +19,10 @@ class Settings:
         self.SUPABASE_SERVICE_KEY = os.getenv('SUPABASE_SERVICE_KEY')
         
         # Application Configuration
-        self.SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+        secret_key = os.getenv('SECRET_KEY')
+        if not secret_key:
+            raise ValueError("SECRET_KEY environment variable must be set for security")
+        self.SECRET_KEY = secret_key
         self.DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
         self.ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
         

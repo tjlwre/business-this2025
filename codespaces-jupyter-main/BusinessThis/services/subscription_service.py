@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import stripe
 import os
 from config.supabase_config import get_supabase_client
+import logging
 
 class SubscriptionService:
     """Subscription service for managing user subscriptions"""

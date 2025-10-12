@@ -5,6 +5,7 @@ Handles admin dashboard, metrics, and user management
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 from config.supabase_config import get_supabase_client, get_supabase_service_client
+import logging
 
 class AdminService:
     """Admin service for dashboard and user management"""

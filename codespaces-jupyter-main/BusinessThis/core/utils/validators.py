@@ -184,3 +184,48 @@ def validate_api_key(api_key: str, service: str) -> bool:
         return len(api_key) > 20
     
     return len(api_key) > 10
+
+def validate_user_input(data: Dict[str, Any], required_fields: List[str] = None) -> Dict[str, Any]:
+    """Comprehensive user input validation"""
+    errors = []
+    warnings = []
+    
+    # Check for required fields
+    if required_fields:
+        for field in required_fields:
+            if field not in data or data[field] is None or data[field] == '':
+                errors.append(f"{field.replace('_', ' ').title()} is required")
+    
+    # Sanitize string inputs
+    for key, value in data.items():
+        if isinstance(value, str):
+            # Check for potential XSS
+            if any(char in value for char in ['<', '>', 'script', 'javascript']):
+                errors.append(f"Invalid characters in {key}")
+            
+            # Check for SQL injection patterns
+            if any(pattern in value.lower() for pattern in ['union', 'select', 'drop', 'delete', 'insert', 'update']):
+                errors.append(f"Invalid input pattern in {key}")
+            
+            # Length validation
+            if len(value) > 1000:
+                warnings.append(f"{key} is very long")
+    
+    # Numeric validation
+    numeric_fields = ['income', 'expenses', 'savings', 'amount', 'target_amount']
+    for field in numeric_fields:
+        if field in data and data[field] is not None:
+            try:
+                num_value = float(data[field])
+                if num_value < 0:
+                    errors.append(f"{field} cannot be negative")
+                elif num_value > 10000000:
+                    warnings.append(f"{field} seems unreasonably high")
+            except (ValueError, TypeError):
+                errors.append(f"{field} must be a valid number")
+    
+    return {
+        'valid': len(errors) == 0,
+        'errors': errors,
+        'warnings': warnings
+    }

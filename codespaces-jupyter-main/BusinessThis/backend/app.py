@@ -13,6 +13,7 @@ from functools import wraps
 
 # Import our modules
 from config.supabase_config import get_supabase_client, get_supabase_service_client
+from config.validation import validate_environment
 from core.models.user import User
 from core.models.financial_profile import FinancialProfile
 from core.models.savings_goal import SavingsGoal
@@ -29,13 +30,34 @@ from services.affiliate_service import AffiliateService
 from services.course_service import CourseService
 from services.multi_user_service import MultiUserService
 from services.advisor_service import AdvisorService
-from core.utils.validators import validate_email, validate_financial_data
+from core.utils.validators import validate_email, validate_financial_data, validate_user_input
 from core.utils.decorators import require_auth, require_subscription
+from core.utils.security import rate_limit, add_security_headers, log_security_event
+from core.utils.error_handler import handle_errors, ValidationError, AuthenticationError
+
+# Validate environment before starting
+try:
+    validate_environment()
+    print("✅ Environment validation passed")
+except ValueError as e:
+    print(f"❌ Environment validation failed: {e}")
+    raise
 
 # Initialize Flask app
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
-CORS(app, origins=['http://localhost:3000', 'http://localhost:8501'])
+# Get secret key from environment - no default for security
+secret_key = os.getenv('SECRET_KEY')
+if not secret_key:
+    raise ValueError("SECRET_KEY environment variable must be set for security")
+app.config['SECRET_KEY'] = secret_key
+# Dynamic CORS configuration
+cors_origins = os.getenv('CORS_ORIGINS', 'http://localhost:3000,http://localhost:8501').split(',')
+CORS(app, origins=cors_origins)
+
+# Add security headers to all responses
+@app.after_request
+def after_request(response):
+    return add_security_headers(response)
 
 # Initialize services
 auth_service = AuthService()
@@ -77,6 +99,8 @@ def verify_jwt_token(token: str) -> dict:
 
 # Authentication endpoints
 @app.route('/api/auth/register', methods=['POST'])
+@rate_limit(max_requests=5, window=3600)  # 5 registrations per hour
+@handle_errors
 def register():
     """Register a new user"""
     try:
@@ -111,6 +135,8 @@ def register():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/auth/login', methods=['POST'])
+@rate_limit(max_requests=10, window=3600)  # 10 login attempts per hour
+@handle_errors
 def login():
     """Login user"""
     try:
@@ -546,7 +572,12 @@ def get_spending_recommendations():
         profile = profile_response['profile']
         
         # Get recent transactions (mock data for now)
-        recent_transactions = []  # TODO: Implement transaction retrieval
+        # Get recent transactions for the user
+        try:
+            recent_transactions = financial_service.get_recent_transactions(user_id, limit=5)
+        except Exception as e:
+            print(f"Error retrieving transactions: {e}")
+            recent_transactions = []
         
         result = ai_service.get_spending_recommendations(profile, recent_transactions)
         
@@ -640,7 +671,9 @@ def get_investment_advice():
 def get_admin_dashboard():
     """Get admin dashboard metrics"""
     try:
-        # TODO: Add admin role check
+        # Check if user has admin role
+        if not admin_service.is_admin(user_id):
+            return jsonify({'error': 'Admin access required'}), 403
         user_id = request.user_id
         
         result = admin_service.get_dashboard_metrics()
@@ -655,7 +688,9 @@ def get_admin_dashboard():
 def get_admin_users():
     """Get paginated user list"""
     try:
-        # TODO: Add admin role check
+        # Check if user has admin role
+        if not admin_service.is_admin(user_id):
+            return jsonify({'error': 'Admin access required'}), 403
         user_id = request.user_id
         
         page = int(request.args.get('page', 1))
@@ -674,7 +709,9 @@ def get_admin_users():
 def get_admin_user_details(user_id):
     """Get detailed user information"""
     try:
-        # TODO: Add admin role check
+        # Check if user has admin role
+        if not admin_service.is_admin(user_id):
+            return jsonify({'error': 'Admin access required'}), 403
         admin_user_id = request.user_id
         
         result = admin_service.get_user_details(user_id)
@@ -689,7 +726,9 @@ def get_admin_user_details(user_id):
 def update_admin_user_subscription(user_id):
     """Update user subscription"""
     try:
-        # TODO: Add admin role check
+        # Check if user has admin role
+        if not admin_service.is_admin(user_id):
+            return jsonify({'error': 'Admin access required'}), 403
         admin_user_id = request.user_id
         data = request.get_json()
         
@@ -711,7 +750,9 @@ def update_admin_user_subscription(user_id):
 def get_admin_support_tickets():
     """Get support tickets"""
     try:
-        # TODO: Add admin role check
+        # Check if user has admin role
+        if not admin_service.is_admin(user_id):
+            return jsonify({'error': 'Admin access required'}), 403
         user_id = request.user_id
         
         status = request.args.get('status', 'all')
@@ -728,7 +769,9 @@ def get_admin_support_tickets():
 def update_admin_support_ticket(ticket_id):
     """Update support ticket"""
     try:
-        # TODO: Add admin role check
+        # Check if user has admin role
+        if not admin_service.is_admin(user_id):
+            return jsonify({'error': 'Admin access required'}), 403
         user_id = request.user_id
         data = request.get_json()
         
@@ -804,7 +847,12 @@ def generate_excel_export():
         goals = goals_response if goals_status == 200 else []
         
         # Get transactions (mock data for now)
-        transactions = []  # TODO: Implement transaction retrieval
+        # Get transactions for the user
+        try:
+            transactions = financial_service.get_user_transactions(user_id)
+        except Exception as e:
+            print(f"Error retrieving transactions: {e}")
+            transactions = []
         
         # Generate Excel
         excel_data = reports_service.generate_excel_export(profile, goals, transactions)
@@ -840,7 +888,12 @@ def generate_email_summary():
         goals = goals_response if goals_status == 200 else []
         
         # Get recent transactions (mock data for now)
-        transactions = []  # TODO: Implement transaction retrieval
+        # Get transactions for the user
+        try:
+            transactions = financial_service.get_user_transactions(user_id)
+        except Exception as e:
+            print(f"Error retrieving transactions: {e}")
+            transactions = []
         
         # Generate email summary
         summary = reports_service.generate_email_summary(profile, goals, transactions)
@@ -1811,4 +1864,8 @@ if __name__ == '__main__':
     load_dotenv()
     
     # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Production-safe configuration
+    debug_mode = os.getenv('DEBUG', 'False').lower() == 'true'
+    host = os.getenv('HOST', '0.0.0.0')
+    port = int(os.getenv('PORT', 5000))
+    app.run(debug=debug_mode, host=host, port=port)

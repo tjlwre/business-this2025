@@ -5,6 +5,7 @@ Handles all AI-related functionality using Ollama
 import os
 from typing import Dict, Any, Optional, List
 from integrations.ollama_integration import OllamaIntegration
+import logging
 
 class AIService:
     """AI service for financial coaching and analysis"""

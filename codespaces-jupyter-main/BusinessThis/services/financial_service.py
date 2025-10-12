@@ -9,6 +9,7 @@ from models.financial_profile import FinancialProfile
 from models.savings_goal import SavingsGoal
 from models.transaction import Transaction
 from core.calculations import get_all_safe_spends
+import logging
 
 class FinancialService:
     """Financial service for calculations and data management"""

@@ -26,7 +26,9 @@ def require_auth(f: Callable) -> Callable:
         
         try:
             # Verify JWT token
-            secret_key = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+            secret_key = os.getenv('SECRET_KEY')
+            if not secret_key:
+                raise ValueError("SECRET_KEY environment variable must be set")
             payload = jwt.decode(token, secret_key, algorithms=['HS256'])
             
             # Add user_id to request object for use in route handlers

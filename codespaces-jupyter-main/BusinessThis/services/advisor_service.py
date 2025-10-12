@@ -8,6 +8,7 @@ from decimal import Decimal
 import json
 import csv
 import io
+import logging
 
 class AdvisorService:
     """Advisor service for financial advisors and client management"""

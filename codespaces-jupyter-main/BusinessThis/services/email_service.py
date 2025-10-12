@@ -8,6 +8,7 @@ from sendgrid.helpers.mail import Mail, Email, To, Content, TemplateId, DynamicT
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 import json
+import logging
 
 class EmailService:
     """Email service for marketing and notifications"""

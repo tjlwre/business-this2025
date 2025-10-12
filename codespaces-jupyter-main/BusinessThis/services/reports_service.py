@@ -17,6 +17,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import base64
 from io import BytesIO
+import logging
 
 class ReportsService:
     """Reports service for generating PDF reports and Excel exports"""

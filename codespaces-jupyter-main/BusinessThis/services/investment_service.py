@@ -6,6 +6,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime, date
 from decimal import Decimal
 import math
+import logging
 
 class InvestmentService:
     """Investment service for portfolio management and calculations"""

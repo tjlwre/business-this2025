@@ -5,6 +5,7 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 from config.supabase_config import get_supabase_client, get_supabase_service_client
 from models.user import User
+import logging
 
 class AuthService:
     """Authentication service"""

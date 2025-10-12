@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 import requests
 import json
+import logging
 
 class AffiliateService:
     """Affiliate service for partner integrations and referral tracking"""
