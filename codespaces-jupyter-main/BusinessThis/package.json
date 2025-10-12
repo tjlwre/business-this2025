@@ -1,6 +1,6 @@
 {
   "name": "businessthis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Smart financial planning platform with AI-powered coaching",
   "main": "landing_page.html",
   "scripts": {
