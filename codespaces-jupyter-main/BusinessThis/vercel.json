@@ -1,22 +1,10 @@
 {
   "version": 2,
   "name": "business-this-2025",
-  "buildCommand": "echo 'Static site - no build required'",
-  "outputDirectory": ".",
-  "installCommand": "echo 'No dependencies to install'",
-  "framework": null,
   "builds": [
     {
       "src": "*.html",
       "use": "@vercel/static"
-    },
-    {
-      "src": "frontend/app.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "backend/app.py",
-      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -27,6 +15,10 @@
     {
       "src": "/app",
       "dest": "/app.html"
+    },
+    {
+      "src": "/demo",
+      "dest": "/landing_page.html"
     },
     {
       "src": "/pricing",
@@ -47,62 +39,12 @@
     {
       "src": "/terms",
       "dest": "/terms.html"
-    },
-    {
-      "src": "/demo",
-      "dest": "/landing_page.html"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/app.py"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.openai.com https://api.stripe.com https://api.paypal.com;"
-        }
-      ]
     }
   ],
   "rewrites": [
     {
-      "source": "/404",
-      "destination": "/404.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "functions": {
-    "*.html": {
-      "maxDuration": 10
-    },
-    "backend/app.py": {
-      "maxDuration": 30
-    }
-  },
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
