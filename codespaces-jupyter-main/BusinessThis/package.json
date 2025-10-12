@@ -4,9 +4,9 @@
   "description": "Smart financial planning platform with AI-powered coaching",
   "main": "landing_page.html",
   "scripts": {
-    "build": "echo 'Static site - no build required'",
-    "start": "echo 'Static site - no start required'",
-    "dev": "echo 'Static site - no dev server required'"
+    "build": "echo 'No build required'",
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "keywords": [
     "financial planning",
@@ -26,5 +26,8 @@
   "homepage": "https://businessthis.com",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
