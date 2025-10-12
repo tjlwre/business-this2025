@@ -12,6 +12,7 @@ supabase>=2.0.0
 stripe>=7.0.0
 pyjwt>=2.8.0
 werkzeug>=2.3.0
+gunicorn>=21.2.0
 
 # Additional utilities
 python-dateutil>=2.8.0
@@ -20,7 +21,6 @@ pytz>=2023.3
 # Reports and visualization
 reportlab>=4.0.0
 openpyxl>=3.1.0
-plotly>=5.17.0
 
 # AI and ML
 openai>=1.0.0
