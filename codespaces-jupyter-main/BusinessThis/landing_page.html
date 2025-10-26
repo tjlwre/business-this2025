@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: dark)">
+    <title>BusinessThis - Smart Financial Planning That Actually Works</title>
+    <meta name="description" content="Take control of your finances with BusinessThis. Calculate safe spending, track savings goals, and build wealth with AI-powered financial coaching. Start free today!">
+    <meta name="keywords" content="financial planning, budgeting, savings calculator, financial health, money management, personal finance">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://businessthis.com/">
+    <meta property="og:title" content="BusinessThis - Smart Financial Planning That Actually Works">
+    <meta property="og:description" content="Take control of your finances with BusinessThis. Calculate safe spending, track savings goals, and build wealth with AI-powered financial coaching.">
+    <meta property="og:image" content="https://businessthis.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://businessthis.com/">
+    <meta property="twitter:title" content="BusinessThis - Smart Financial Planning That Actually Works">
+    <meta property="twitter:description" content="Take control of your finances with BusinessThis. Calculate safe spending, track savings goals, and build wealth with AI-powered financial coaching.">
+    <meta property="twitter:image" content="https://businessthis.com/og-image.jpg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BusinessThis",
+        "description": "Smart financial planning platform with AI-powered coaching",
+        "url": "https://businessthis.com",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.debug.js"></script>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --primary-blue-light: #1e40af;
+            --primary-green: #065f46;
+            --primary-green-light: #047857;
+            --accent-gold: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 95, 70, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Demo Calculator Section */
+        .demo-section {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-xl);
+            margin: 2rem auto;
+            max-width: 1200px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .demo-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-header p {
+            opacity: 0.9;
+            font-size: 1.125rem;
+        }
+
+        .demo-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .demo-sidebar {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            padding: 2rem;
+            border-right: 1px solid var(--border-light);
+        }
+
+        .demo-sidebar h3 {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.875rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .demo-results {
+            padding: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-light) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-card p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .features p {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            text-align: left;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 4rem 0;
+            background: var(--bg-light);
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .pricing p {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .price-period {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .pricing-card li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-card li i {
+            color: var(--primary-green);
+            font-size: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Pricing button styles */
+        .pricing-btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Budget breakdown styles */
+        .budget-breakdown {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .budget-title {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .budget-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .budget-label {
+            width: 120px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .budget-bar {
+            flex: 1;
+            height: 2rem;
+            border-radius: 1rem;
+            margin: 0 1rem;
+            position: relative;
+        }
+
+        .budget-fixed {
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+        }
+
+        .budget-savings {
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-green-light));
+        }
+
+        .budget-variable {
+            background: linear-gradient(90deg, #6b7280, #9ca3af);
+        }
+
+        .budget-safe {
+            background: linear-gradient(90deg, var(--accent-gold), #fbbf24);
+        }
+
+        .budget-amount {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .demo-content {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-light);
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Demo data styling */
+        .demo-data {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .demo-data h4 {
+            margin: 0 0 0.5rem 0;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .demo-list {
+            margin: 0.5rem 0;
+            padding-left: 1.25rem;
+        }
+
+        .demo-list li {
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-chart-line"></i>
+                BusinessThis
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="/app" target="_blank">Launch App</a></li>
+            </ul>
+            <a href="/app" class="cta-button" target="_blank">Launch App</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="fade-in-up">Take Control of Your Financial Future</h1>
+            <p class="fade-in-up">Stop guessing how much you can spend. BusinessThis calculates your safe daily spending amount so you can reach your financial goals without stress.</p>
+            <div class="hero-buttons fade-in-up">
+                <a href="/app" class="btn-primary" target="_blank">
+                    <i class="fas fa-calculator"></i>
+                    Try Free Calculator
+                </a>
+                <a href="#demo" class="btn-secondary">
+                    <i class="fas fa-play"></i>
+                    See How It Works
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="demo-header">
+            <h2>Try Our Smart Financial Calculator</h2>
+            <p>See exactly how much you can safely spend each day while reaching your savings goals</p>
+        </div>
+        <div class="demo-content">
+            <div class="demo-sidebar">
+                <h3><i class="fas fa-calculator"></i> Your Financial Data</h3>
+                
+                <div class="demo-data">
+                    <h4>💡 Try These Sample Values</h4>
+                    <ul class="demo-list">
+                        <li>Income: $5,000</li>
+                        <li>Fixed: $2,000</li>
+                        <li>Variable: $800</li>
+                        <li>Goal: $12,000</li>
+                        <li>Months: 12</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="income">Monthly Income ($)</label>
+                    <input type="number" id="income" value="5000" min="0" step="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fixed">Fixed Expenses ($)</label>
+                    <input type="number" id="fixed" value="2000" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="variable">Variable Expenses ($)</label>
+                    <input type="number" id="variable" value="800" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="goal">Savings Goal ($)</label>
+                    <input type="number" id="goal" value="12000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="months">Months to Reach Goal</label>
+                    <input type="number" id="months" value="12" min="1" step="1">
+                </div>
+                
+                <button class="calculate-btn" onclick="calculate()">
+                    <i class="fas fa-rocket"></i>
+                    Calculate Safe Spending
+                </button>
+            </div>
+            
+            <div class="demo-results">
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Daily Safe Spend</h3>
+                        <div class="amount" id="daily-result">$46.67</div>
+                        <p>Per day</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Weekly Safe Spend</h3>
+                        <div class="amount" id="weekly-result">$326.67</div>
+                        <p>Per week</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Monthly Safe Spend</h3>
+                        <div class="amount" id="monthly-result">$1,400.00</div>
+                        <p>Per month</p>
+                    </div>
+                </div>
+                
+                <div class="budget-breakdown">
+                    <h3 class="budget-title">Monthly Budget Breakdown</h3>
+                    <div class="budget-row">
+                        <div class="budget-label">Fixed Expenses</div>
+                        <div class="budget-bar budget-fixed">
+                            <div class="budget-amount" id="chart-fixed">$2,000</div>
+                        </div>
+                    </div>
+                    <div class="budget-row">
+                        <div class="budget-label">Savings Goal</div>
+                        <div class="budget-bar budget-savings">
+                            <div class="budget-amount" id="chart-savings">$1,000</div>
+                        </div>
+                    </div>
+                    <div class="budget-row">
+                        <div class="budget-label">Variable Expenses</div>
+                        <div class="budget-bar budget-variable">
+                            <div class="budget-amount" id="chart-variable">$800</div>
+                        </div>
+                    </div>
+                    <div class="budget-row">
+                        <div class="budget-label">Safe Monthly Spend</div>
+                        <div class="budget-bar budget-safe">
+                            <div class="budget-amount" id="chart-safe">$1,400</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-container">
+            <h2>Why Choose BusinessThis?</h2>
+            <p>Take control of your finances with our comprehensive suite of financial planning tools</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Smart Spending Calculator</h3>
+                    <p>Calculate your exact safe daily spending amount based on your income, expenses, and savings goals. No more guessing or overspending.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <h3>Multiple Savings Goals</h3>
+                    <p>Track unlimited savings goals with our advanced goal management system. Set timelines, monitor progress, and stay motivated.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Financial Health Score</h3>
+                    <p>Get a comprehensive 0-100 financial health score based on your savings rate, debt ratio, and emergency fund status.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Financial Coaching</h3>
+                    <p>Get personalized financial advice from our AI-powered coach. Receive daily tips, spending recommendations, and goal strategies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Advanced Reports</h3>
+                    <p>Generate detailed PDF and Excel reports of your financial progress. Perfect for sharing with financial advisors or family.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Access</h3>
+                    <p>Access your financial data anywhere with our mobile-optimized interface. Check your safe spending amount on the go.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="pricing-container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Start free and upgrade as you grow. No hidden fees, no surprises.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0</div>
+                    <div class="price-period">forever</div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Basic spending calculator</li>
+                        <li><i class="fas fa-check"></i> 1 savings goal</li>
+                        <li><i class="fas fa-check"></i> Financial health score</li>
+                        <li><i class="fas fa-check"></i> Basic reports</li>
+                    </ul>
+                    <a href="/app" class="btn-secondary pricing-btn" target="_blank">Get Started Free</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <h3>Premium</h3>
+                    <div class="price">$9.99</div>
+                    <div class="price-period">per month</div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Everything in Free</li>
+                        <li><i class="fas fa-check"></i> 5 savings goals</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics</li>
+                        <li><i class="fas fa-check"></i> PDF/Excel exports</li>
+                        <li><i class="fas fa-check"></i> Email notifications</li>
+                        <li><i class="fas fa-check"></i> 50 AI interactions/month</li>
+                    </ul>
+                    <a href="/app" class="btn-primary pricing-btn" target="_blank">Start Premium Trial</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <div class="price">$19.99</div>
+                    <div class="price-period">per month</div>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Everything in Premium</li>
+                        <li><i class="fas fa-check"></i> Unlimited savings goals</li>
+                        <li><i class="fas fa-check"></i> AI financial coaching</li>
+                        <li><i class="fas fa-check"></i> Investment tracking</li>
+                        <li><i class="fas fa-check"></i> API access</li>
+                        <li><i class="fas fa-check"></i> White-label options</li>
+                        <li><i class="fas fa-check"></i> Unlimited AI interactions</li>
+                    </ul>
+                    <a href="/app" class="btn-secondary pricing-btn" target="_blank">Start Pro Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="testimonials-container">
+            <h2>What Our Users Say</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"BusinessThis completely changed how I manage my money. I finally know exactly how much I can spend without jeopardizing my savings goals. It's like having a financial advisor in my pocket!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The AI coaching feature is incredible. It gives me personalized advice that actually makes sense for my situation. I've saved $3,000 more this year than last year!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Mike Rodriguez</h4>
+                            <p>Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I love how simple it is to use. Just input my numbers and I get clear, actionable insights. The financial health score helped me understand where I needed to improve."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EL</div>
+                        <div class="author-info">
+                            <h4>Emily Liu</h4>
+                            <p>Teacher</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to Take Control of Your Finances?</h2>
+            <p>Join thousands of users who are already building wealth with BusinessThis. Start your free trial today.</p>
+            <div class="cta-buttons">
+                <a href="/app" class="btn-primary" target="_blank">
+                    <i class="fas fa-rocket"></i>
+                    Try Free Calculator
+                </a>
+                <a href="#pricing" class="btn-secondary">
+                    <i class="fas fa-credit-card"></i>
+                    View Pricing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#">API</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 BusinessThis. All rights reserved. Created by Ontiqua LLC.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Calculator functionality
+        function calculate() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const fixed = parseFloat(document.getElementById('fixed').value) || 0;
+            const variable = parseFloat(document.getElementById('variable').value) || 0;
+            const goal = parseFloat(document.getElementById('goal').value) || 0;
+            const months = parseInt(document.getElementById('months').value) || 1;
+            
+            if (months <= 0) {
+                alert('Months for goal must be positive.');
+                return;
+            }
+            
+            const monthlySavings = goal / months;
+            const monthlyDisposable = income - fixed - monthlySavings;
+            const monthlySafeSpend = monthlyDisposable - variable;
+            const dailySafeSpend = Math.max(0, monthlySafeSpend / 30);
+            const weeklySafeSpend = dailySafeSpend * 7;
+            
+            // Update all result displays
+            document.getElementById('daily-result').textContent = '$' + dailySafeSpend.toFixed(2);
+            document.getElementById('weekly-result').textContent = '$' + weeklySafeSpend.toFixed(2);
+            document.getElementById('monthly-result').textContent = '$' + Math.max(0, monthlySafeSpend).toFixed(2);
+            
+            // Update chart values
+            document.getElementById('chart-fixed').textContent = '$' + fixed.toLocaleString();
+            document.getElementById('chart-savings').textContent = '$' + monthlySavings.toLocaleString();
+            document.getElementById('chart-variable').textContent = '$' + variable.toLocaleString();
+            document.getElementById('chart-safe').textContent = '$' + Math.max(0, monthlySafeSpend).toLocaleString();
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all feature cards and testimonial cards
+        document.querySelectorAll('.feature-card, .testimonial-card, .pricing-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Calculate on page load
+        window.addEventListener('load', calculate);
+        
+        // Add input event listeners for real-time calculation
+        document.querySelectorAll('#income, #fixed, #variable, #goal, #months').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusinessThis - Financial Calculator</title>
+    <style>
+        /* Import professional fonts and icons */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Animated background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 95, 70, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(5px) translateY(-10px); }
+            75% { transform: translateX(-5px) translateY(5px); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 
+                0 20px 50px -10px rgba(0, 0, 0, 0.15),
+                0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+            position: relative;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            animation: headerShimmer 3s ease-in-out infinite;
+        }
+        @keyframes headerShimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes titleGlow {
+            0% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+            100% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.1); }
+        }
+        .header p {
+            margin: 1rem 0 0 0;
+            opacity: 0.95;
+            font-size: 1.25rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        .header .icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .content {
+            display: flex;
+            min-height: 500px;
+        }
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            padding: 2rem;
+            border-right: 1px solid rgba(30, 58, 138, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e3a8a, #1e40af, #065f46);
+        }
+        .sidebar h3 {
+            margin: 0 0 2rem 0;
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-bottom: 3px solid transparent;
+            background: linear-gradient(90deg, #1e3a8a, #1e40af) bottom;
+            background-size: 100% 3px;
+            background-repeat: no-repeat;
+            padding-bottom: 1rem;
+            position: relative;
+        }
+        .sidebar h3::before {
+            content: '💰';
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            font-size: 0.875rem;
+            gap: 0.5rem;
+        }
+        .form-group label::before {
+            content: '💵';
+            font-size: 1rem;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-2px) rotate(5deg); }
+            50% { transform: translateY(-1px) rotate(0deg); }
+            75% { transform: translateY(-2px) rotate(-5deg); }
+        }
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 
+                inset 0 1px 3px rgba(0, 0, 0, 0.1),
+                0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #1e40af;
+            box-shadow: 
+                0 0 0 4px rgba(30, 64, 175, 0.1),
+                inset 0 1px 3px rgba(0, 0, 0, 0.1),
+                0 4px 12px rgba(30, 64, 175, 0.15);
+            transform: translateY(-1px);
+        }
+        .form-group input:hover {
+            border-color: #1e40af;
+            box-shadow: 
+                0 2px 8px rgba(30, 64, 175, 0.1),
+                inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #065f46 100%);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 8px 25px -5px rgba(30, 58, 138, 0.3),
+                0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .calculate-btn:hover::before {
+            left: 100%;
+        }
+        .calculate-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 
+                0 15px 35px -5px rgba(30, 58, 138, 0.4),
+                0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .calculate-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+        .calculate-btn::after {
+            content: '🚀';
+            margin-left: 0.5rem;
+            animation: rocketBoost 2s ease-in-out infinite;
+        }
+        @keyframes rocketBoost {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+        .main-content {
+            flex: 1;
+            padding: 1.5rem;
+        }
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+            border: none;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 
+                0 10px 25px -5px rgba(6, 95, 70, 0.3),
+                0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: successPulse 2s ease-in-out infinite;
+        }
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .result-card::before {
+            content: '✨';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+        }
+        .result-card h2 {
+            margin: 0 0 0.5rem 0;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .result-card .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 0.5rem 0;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(30, 58, 138, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 
+                0 10px 25px -5px rgba(0, 0, 0, 0.1),
+                0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e3a8a, #1e40af, #065f46);
+            border-radius: 1rem 1rem 0 0;
+        }
+        .chart-title {
+            margin: 0 0 1.5rem 0;
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .chart-label {
+            width: 150px;
+            font-weight: 500;
+            color: #374151;
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-value {
+            flex: 1;
+            height: 2rem;
+            background: linear-gradient(90deg, #1e3a8a, #1e40af);
+            border-radius: 1rem;
+            position: relative;
+            margin: 0 1rem;
+        }
+        .chart-amount {
+            font-weight: 600;
+            color: #374151;
+            min-width: 80px;
+            text-align: right;
+            font-family: 'Inter', sans-serif;
+        }
+        .footer {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e3a8a 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 -10px 25px -5px rgba(30, 58, 138, 0.3),
+                0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            animation: footerShimmer 4s ease-in-out infinite;
+        }
+        @keyframes footerShimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        .demo-data {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .demo-data h4 {
+            margin: 0 0 0.5rem 0;
+            color: #92400e;
+            font-weight: 600;
+        }
+        .demo-list {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .result-description {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-fixed {
+            width: 40%;
+        }
+        .chart-savings {
+            width: 20%;
+        }
+        .chart-variable {
+            width: 16%;
+        }
+        .chart-safe {
+            width: 24%;
+            background: linear-gradient(90deg, #065f46, #047857);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="icon">💼</span>BusinessThis</h1>
+            <p>Input your financial data to calculate your safe daily spending amount without risking your goals.</p>
+        </div>
+        
+        <div class="content">
+            <div class="sidebar">
+                <h3>Financial Inputs</h3>
+                
+                <div class="demo-data">
+                    <h4>💡 Demo Data</h4>
+                    <p>Try these sample values:</p>
+                    <ul class="demo-list">
+                        <li>Income: $5,000</li>
+                        <li>Fixed: $2,000</li>
+                        <li>Variable: $800</li>
+                        <li>Goal: $12,000</li>
+                        <li>Months: 12</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="income">Monthly Income ($)</label>
+                    <input type="number" id="income" value="5000" min="0" step="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fixed">Fixed Expenses ($)</label>
+                    <input type="number" id="fixed" value="2000" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="variable">Variable Expenses Estimate ($)</label>
+                    <input type="number" id="variable" value="800" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="goal">Savings Goal ($)</label>
+                    <input type="number" id="goal" value="12000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="months">Months for Goal</label>
+                    <input type="number" id="months" value="12" min="1" step="1">
+                </div>
+                
+                <button class="calculate-btn" onclick="calculate()">Calculate Safe Daily Spend</button>
+            </div>
+            
+            <div class="main-content">
+                <div class="results-container">
+                    <div class="result-card">
+                        <h2>Daily Safe Spend</h2>
+                        <div class="amount" id="daily-result">$46.67</div>
+                        <p class="result-description">Per day</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h2>Weekly Safe Spend</h2>
+                        <div class="amount" id="weekly-result">$326.67</div>
+                        <p class="result-description">Per week</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h2>Monthly Safe Spend</h2>
+                        <div class="amount" id="monthly-result">$1,400.00</div>
+                        <p class="result-description">Per month</p>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="chart-title">Monthly Budget Breakdown</h3>
+                    <div class="chart-bar">
+                        <div class="chart-label">Fixed Expenses</div>
+                        <div class="chart-value chart-fixed"></div>
+                        <div class="chart-amount">$2,000</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Savings Contribution</div>
+                        <div class="chart-value chart-savings"></div>
+                        <div class="chart-amount">$1,000</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Variable Expenses</div>
+                        <div class="chart-value chart-variable"></div>
+                        <div class="chart-amount">$800</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-label">Safe Monthly Spend</div>
+                        <div class="chart-value chart-safe"></div>
+                        <div class="chart-amount">$1,400</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>2025. BusinessThis(c). Created by Ontiqua LLC. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const fixed = parseFloat(document.getElementById('fixed').value) || 0;
+            const variable = parseFloat(document.getElementById('variable').value) || 0;
+            const goal = parseFloat(document.getElementById('goal').value) || 0;
+            const months = parseInt(document.getElementById('months').value) || 1;
+            
+            if (months <= 0) {
+                alert('Months for goal must be positive.');
+                return;
+            }
+            
+            const monthlySavings = goal / months;
+            const monthlyDisposable = income - fixed - monthlySavings;
+            const monthlySafeSpend = monthlyDisposable - variable;
+            const dailySafeSpend = Math.max(0, monthlySafeSpend / 30);
+            const weeklySafeSpend = dailySafeSpend * 7;
+            
+            // Update all result displays
+            document.getElementById('daily-result').textContent = '$' + dailySafeSpend.toFixed(2);
+            document.getElementById('weekly-result').textContent = '$' + weeklySafeSpend.toFixed(2);
+            document.getElementById('monthly-result').textContent = '$' + Math.max(0, monthlySafeSpend).toFixed(2);
+            
+            // Update chart values
+            const chartAmounts = document.querySelectorAll('.chart-amount');
+            chartAmounts[0].textContent = '$' + fixed.toLocaleString();
+            chartAmounts[1].textContent = '$' + monthlySavings.toLocaleString();
+            chartAmounts[2].textContent = '$' + variable.toLocaleString();
+            chartAmounts[3].textContent = '$' + Math.max(0, monthlySafeSpend).toLocaleString();
+            
+            // Update chart widths proportionally
+            const maxValue = Math.max(fixed, monthlySavings, variable, Math.max(0, monthlySafeSpend));
+            const bars = document.querySelectorAll('.chart-value');
+            bars[0].style.width = (fixed / maxValue * 100) + '%';
+            bars[1].style.width = (monthlySavings / maxValue * 100) + '%';
+            bars[2].style.width = (variable / maxValue * 100) + '%';
+            bars[3].style.width = (Math.max(0, monthlySafeSpend) / maxValue * 100) + '%';
+        }
+        
+        // Calculate on page load
+        window.onload = calculate;
+    </script>
+</body>
+</html>

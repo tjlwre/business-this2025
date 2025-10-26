@@ -1,0 +1,33 @@
+{
+  "name": "businessthis",
+  "version": "1.0.1",
+  "description": "Smart financial planning platform with AI-powered coaching",
+  "main": "landing_page.html",
+  "scripts": {
+    "build": "echo 'No build required'",
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "financial planning",
+    "budgeting",
+    "savings calculator",
+    "financial health",
+    "money management",
+    "personal finance",
+    "AI coaching"
+  ],
+  "author": "Ontiqua LLC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tjlwre/business-this2025"
+  },
+  "homepage": "https://businessthis.com",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

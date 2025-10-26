@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - BusinessThis</title>
+    <meta name="description" content="BusinessThis Terms of Service - Read our terms and conditions for using our financial planning platform.">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --primary-blue-light: #1e40af;
+            --primary-green: #065f46;
+            --primary-green-light: #047857;
+            --accent-gold: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .header-section p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        .last-updated {
+            background: var(--accent-gold);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Content */
+        .content-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .content-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+            color: var(--text-dark);
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .content-section ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .highlight-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-btn {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .header-section h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-chart-line"></i>
+                BusinessThis
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/app">App</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1>Terms of Service</h1>
+            <p>Please read these terms carefully before using BusinessThis. By using our service, you agree to be bound by these terms.</p>
+            <div class="last-updated">Last Updated: January 15, 2025</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using BusinessThis ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not use the Service.</p>
+            
+            <p>These Terms apply to all users of the Service, including visitors, registered users, and subscribers. We reserve the right to modify these Terms at any time, and your continued use of the Service constitutes acceptance of any changes.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>2. Description of Service</h2>
+            <p>BusinessThis is a financial planning platform that provides:</p>
+            
+            <ul>
+                <li>Safe spending calculators and financial health assessments</li>
+                <li>Savings goal tracking and progress monitoring</li>
+                <li>AI-powered financial coaching and recommendations</li>
+                <li>Budget analysis and spending insights</li>
+                <li>Financial reports and export capabilities</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Important:</strong> BusinessThis provides educational and planning tools only. We are not a licensed financial advisor, and our service does not constitute personalized financial advice.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>3. User Accounts and Registration</h2>
+            <p>To access certain features of the Service, you must create an account. You agree to:</p>
+            
+            <h3>Account Requirements</h3>
+            <ul>
+                <li>Provide accurate, current, and complete information</li>
+                <li>Maintain and update your account information</li>
+                <li>Keep your password secure and confidential</li>
+                <li>Notify us immediately of any unauthorized use</li>
+                <li>Be responsible for all activities under your account</li>
+            </ul>
+
+            <h3>Account Restrictions</h3>
+            <ul>
+                <li>One account per person or entity</li>
+                <li>No sharing of account credentials</li>
+                <li>No creating accounts for others</li>
+                <li>No automated account creation</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>4. Acceptable Use Policy</h2>
+            <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You may not:</p>
+            
+            <h3>Prohibited Activities</h3>
+            <ul>
+                <li>Use the Service for any illegal or unauthorized purpose</li>
+                <li>Attempt to gain unauthorized access to our systems</li>
+                <li>Interfere with or disrupt the Service or servers</li>
+                <li>Transmit viruses, malware, or harmful code</li>
+                <li>Reverse engineer or attempt to extract source code</li>
+                <li>Use automated systems to access the Service</li>
+                <li>Violate any applicable laws or regulations</li>
+            </ul>
+
+            <h3>Content Guidelines</h3>
+            <ul>
+                <li>Provide accurate financial information</li>
+                <li>Respect intellectual property rights</li>
+                <li>Not upload malicious or harmful content</li>
+                <li>Not impersonate others or provide false information</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>5. Subscription and Payment Terms</h2>
+            <p>Certain features of the Service require a paid subscription. By subscribing, you agree to:</p>
+            
+            <h3>Payment Terms</h3>
+            <ul>
+                <li>Pay all fees in advance for the subscription period</li>
+                <li>Provide accurate payment information</li>
+                <li>Authorize automatic renewal of your subscription</li>
+                <li>Notify us of any changes to your payment method</li>
+            </ul>
+
+            <h3>Billing and Renewal</h3>
+            <ul>
+                <li>Subscriptions automatically renew unless cancelled</li>
+                <li>Fees are charged in advance for each billing period</li>
+                <li>Price changes will be communicated 30 days in advance</li>
+                <li>Failed payments may result in service suspension</li>
+            </ul>
+
+            <h3>Cancellation and Refunds</h3>
+            <ul>
+                <li>You may cancel your subscription at any time</li>
+                <li>Cancellation takes effect at the end of your billing period</li>
+                <li>We offer a 30-day money-back guarantee for new subscribers</li>
+                <li>Refunds are processed within 5-10 business days</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>6. Intellectual Property Rights</h2>
+            <p>The Service and its original content, features, and functionality are owned by BusinessThis and are protected by international copyright, trademark, and other intellectual property laws.</p>
+            
+            <h3>Our Rights</h3>
+            <ul>
+                <li>We retain all rights to the Service and its content</li>
+                <li>You may not copy, modify, or distribute our content</li>
+                <li>Our trademarks and logos are protected</li>
+                <li>We may use your feedback to improve our services</li>
+            </ul>
+
+            <h3>Your Rights</h3>
+            <ul>
+                <li>You retain ownership of your personal data</li>
+                <li>You may export your data in standard formats</li>
+                <li>You grant us license to use your data to provide services</li>
+                <li>You may request deletion of your data</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>7. Privacy and Data Protection</h2>
+            <p>Your privacy is important to us. Our collection and use of personal information is governed by our Privacy Policy, which is incorporated into these Terms by reference.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Data Security:</strong> We implement industry-standard security measures to protect your information, including encryption, access controls, and regular security audits.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>8. Disclaimers and Limitations</h2>
+            <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING:</p>
+            
+            <ul>
+                <li>WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</li>
+                <li>WARRANTIES OF NON-INFRINGEMENT</li>
+                <li>WARRANTIES THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE</li>
+                <li>WARRANTIES REGARDING THE ACCURACY OR RELIABILITY OF INFORMATION</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Financial Disclaimer:</strong> BusinessThis is not a licensed financial advisor. Our tools and recommendations are for educational purposes only and should not be considered as personalized financial advice.</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>9. Limitation of Liability</h2>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, BUSINESSTHIS SHALL NOT BE LIABLE FOR:</p>
+            
+            <ul>
+                <li>INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES</li>
+                <li>LOSS OF PROFITS, DATA, OR BUSINESS OPPORTUNITIES</li>
+                <li>DAMAGES RESULTING FROM USE OR INABILITY TO USE THE SERVICE</li>
+                <li>DAMAGES EXCEEDING THE AMOUNT PAID FOR THE SERVICE</li>
+            </ul>
+
+            <p>Some jurisdictions do not allow the exclusion of certain warranties or limitations of liability, so some of the above limitations may not apply to you.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>10. Indemnification</h2>
+            <p>You agree to indemnify and hold harmless BusinessThis, its officers, directors, employees, and agents from any claims, damages, or expenses arising from:</p>
+            
+            <ul>
+                <li>Your use of the Service</li>
+                <li>Your violation of these Terms</li>
+                <li>Your violation of any third-party rights</li>
+                <li>Your violation of any applicable laws</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>11. Termination</h2>
+            <p>We may terminate or suspend your account and access to the Service at any time, with or without notice, for any reason, including:</p>
+            
+            <ul>
+                <li>Violation of these Terms</li>
+                <li>Fraudulent or illegal activity</li>
+                <li>Non-payment of fees</li>
+                <li>Extended periods of inactivity</li>
+            </ul>
+
+            <p>Upon termination, your right to use the Service will cease immediately, and we may delete your account and data in accordance with our data retention policies.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>12. Governing Law and Disputes</h2>
+            <p>These Terms are governed by the laws of the State of New York, without regard to conflict of law principles.</p>
+            
+            <h3>Dispute Resolution</h3>
+            <ul>
+                <li>We encourage resolving disputes through direct communication</li>
+                <li>Disputes may be resolved through binding arbitration</li>
+                <li>Class action waivers may apply</li>
+                <li>Some jurisdictions may have different dispute resolution requirements</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>13. Changes to Terms</h2>
+            <p>We reserve the right to modify these Terms at any time. We will notify users of material changes by:</p>
+            
+            <ul>
+                <li>Posting the updated Terms on our website</li>
+                <li>Sending email notifications to registered users</li>
+                <li>Displaying notices in our application</li>
+                <li>Obtaining consent for significant changes when required</li>
+            </ul>
+
+            <p>Your continued use of the Service after changes become effective constitutes acceptance of the new Terms.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>14. Contact Information</h2>
+            <p>If you have any questions about these Terms, please contact us:</p>
+            
+            <ul>
+                <li><strong>Email:</strong> legal@businessthis.com</li>
+                <li><strong>Address:</strong> 123 Financial District, New York, NY 10004</li>
+                <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+            </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Questions About These Terms?</h2>
+            <p>If you have any questions about our Terms of Service, please don't hesitate to contact us.</p>
+            <a href="/contact" class="contact-btn">
+                <i class="fas fa-envelope"></i>
+                Contact Us
+            </a>
+        </div>
+    </div>
+</body>
+</html>
