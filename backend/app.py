@@ -159,6 +159,28 @@ def health_check():
         'version': '1.0.0'
     }), 200
 
+@app.route('/api/health/supabase', methods=['GET'])
+def supabase_health_check():
+    """Enhanced Supabase health check endpoint"""
+    try:
+        from services.enhanced_supabase_service import EnhancedSupabaseService
+        service = EnhancedSupabaseService()
+        health_status = service.get_health_status()
+        
+        return jsonify({
+            'supabase_status': health_status,
+            'timestamp': datetime.utcnow().isoformat(),
+            'version': '2.22.2'
+        }), 200 if health_status.get('status') == 'healthy' else 503
+        
+    except Exception as e:
+        return jsonify({
+            'supabase_status': 'error',
+            'error': str(e),
+            'timestamp': datetime.utcnow().isoformat(),
+            'version': '2.22.2'
+        }), 503
+
 @app.route('/api/health/ollama', methods=['GET'])
 def ollama_health_check():
     """Check Ollama service health"""

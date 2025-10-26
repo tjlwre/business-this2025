@@ -1,10 +1,9 @@
 """
 AI Service for BusinessThis
-Handles all AI-related functionality using Ollama and Vercel LLM
+Handles all AI-related functionality using Vercel LLM
 """
 import os
 from typing import Dict, Any, Optional, List
-from integrations.ollama_integration import OllamaIntegration
 from integrations.vercel_llm_integration import VercelLLMIntegration
 import logging
 
@@ -12,9 +11,7 @@ class AIService:
     """AI service for financial coaching and analysis"""
     
     def __init__(self):
-        self.ollama = OllamaIntegration()
         self.vercel_llm = VercelLLMIntegration()
-        self.use_vercel = os.getenv('USE_VERCEL_LLM', 'false').lower() == 'true'
     
     def get_financial_coaching(self, profile: Dict[str, Any], question: str) -> Dict[str, Any]:
         """Get AI financial coaching based on user profile and question"""
@@ -22,17 +19,14 @@ class AIService:
             # Format user context from profile
             user_context = self._format_user_context(profile)
             
-            # Get AI advice from preferred provider
-            if self.use_vercel and self.vercel_llm.health_check():
-                advice = self.vercel_llm.generate_financial_advice(user_context, question)
-            else:
-                advice = self.ollama.generate_financial_advice(user_context, question)
+            # Get AI advice from Vercel LLM
+            advice = self.vercel_llm.generate_financial_advice(user_context, question)
             
             if advice:
                 return {
                     'success': True,
                     'advice': advice,
-                    'provider': 'vercel_llm' if self.use_vercel else 'ollama',
+                    'provider': 'vercel_llm',
                     'timestamp': os.getenv('CURRENT_TIMESTAMP', '2024-01-01T00:00:00Z')
                 }
             else:
@@ -52,17 +46,14 @@ class AIService:
     def get_spending_recommendations(self, profile: Dict[str, Any], transactions: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Get AI-powered spending recommendations"""
         try:
-            # Analyze spending patterns using preferred provider
-            if self.use_vercel and self.vercel_llm.health_check():
-                analysis = self.vercel_llm.analyze_spending_patterns(transactions)
-            else:
-                analysis = self.ollama.analyze_spending_patterns(transactions)
+            # Analyze spending patterns using Vercel LLM
+            analysis = self.vercel_llm.analyze_spending_patterns(transactions)
             
             if analysis:
                 return {
                     'success': True,
                     'recommendations': analysis,
-                    'provider': 'vercel_llm' if self.use_vercel else 'ollama',
+                    'provider': 'vercel_llm',
                     'insights': self._extract_insights(analysis),
                     'action_items': self._generate_action_items(profile, analysis)
                 }
@@ -83,21 +74,15 @@ class AIService:
     def get_daily_financial_tip(self, profile: Dict[str, Any]) -> Dict[str, Any]:
         """Get daily financial tip based on user profile"""
         try:
-            # Generate personalized tip using preferred provider
+            # Generate personalized tip using Vercel LLM
             user_context = self._format_user_context(profile)
-            
-            if self.use_vercel and self.vercel_llm.health_check():
-                tip = self.vercel_llm.generate_daily_tip(user_context)
-            else:
-                tip_context = f"User profile: {user_context}"
-                tip_question = "Provide a specific, actionable financial tip for today"
-                tip = self.ollama.generate_financial_advice(tip_context, tip_question)
+            tip = self.vercel_llm.generate_daily_tip(user_context)
             
             if tip:
                 return {
                     'success': True,
                     'tip': tip,
-                    'provider': 'vercel_llm' if self.use_vercel else 'ollama',
+                    'provider': 'vercel_llm',
                     'category': self._categorize_tip(tip),
                     'priority': self._assess_tip_priority(profile, tip)
                 }
@@ -122,17 +107,13 @@ class AIService:
             goals_context = self._format_goals_context(goals)
             user_profile = self._format_user_context(profile)
             
-            if self.use_vercel and self.vercel_llm.health_check():
-                analysis = self.vercel_llm.analyze_financial_goals(goals_context, user_profile)
-            else:
-                goals_question = "Analyze these financial goals and provide specific recommendations for achieving them"
-                analysis = self.ollama.generate_financial_advice(goals_context, goals_question)
+            analysis = self.vercel_llm.analyze_financial_goals(goals_context, user_profile)
             
             if analysis:
                 return {
                     'success': True,
                     'analysis': analysis,
-                    'provider': 'vercel_llm' if self.use_vercel else 'ollama',
+                    'provider': 'vercel_llm',
                     'goal_priorities': self._prioritize_goals(goals, profile),
                     'timeline_recommendations': self._get_timeline_recommendations(goals, profile)
                 }
@@ -157,18 +138,13 @@ class AIService:
             user_context = self._format_user_context(profile)
             portfolio_info = self._format_investment_context(profile, portfolio)
             
-            if self.use_vercel and self.vercel_llm.health_check():
-                advice = self.vercel_llm.get_investment_advice(user_context, portfolio_info)
-            else:
-                investment_context = self._format_investment_context(profile, portfolio)
-                investment_question = "Provide specific investment advice and portfolio recommendations"
-                advice = self.ollama.generate_financial_advice(investment_context, investment_question)
+            advice = self.vercel_llm.get_investment_advice(user_context, portfolio_info)
             
             if advice:
                 return {
                     'success': True,
                     'advice': advice,
-                    'provider': 'vercel_llm' if self.use_vercel else 'ollama',
+                    'provider': 'vercel_llm',
                     'risk_assessment': self._assess_investment_risk(profile, portfolio),
                     'allocation_recommendations': self._get_allocation_recommendations(profile, portfolio)
                 }

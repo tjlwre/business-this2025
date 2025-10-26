@@ -59,8 +59,8 @@ export default function CalculatorPage() {
   const loadFinancialProfile = async () => {
     try {
       const response = await apiClient.getFinancialProfile()
-      if (response.data.profile) {
-        const profile = response.data.profile
+      if (response.data) {
+        const profile = response.data
         setFormData({
           monthly_income: profile.monthly_income?.toString() || '',
           monthly_expenses: profile.monthly_expenses?.toString() || '',
@@ -99,8 +99,33 @@ export default function CalculatorPage() {
           }))
       }
 
-      const response = await apiClient.calculateSafeSpending(calculationData)
-      setCalculation(response.data)
+      const result = apiClient.calculateSafeSpending(
+        calculationData.monthly_income,
+        calculationData.monthly_expenses,
+        0, // variableExpenses
+        calculationData.emergency_fund_target,
+        12 // monthsToSave
+      )
+      
+      // Convert the result to match the expected interface
+      const calculation = {
+        daily_safe_spending: result.daily,
+        weekly_safe_spending: result.weekly,
+        monthly_safe_spending: result.monthly,
+        emergency_fund_months: result.emergencyMonths,
+        financial_health_score: apiClient.calculateFinancialHealthScore({
+          monthly_income: calculationData.monthly_income,
+          fixed_expenses: calculationData.monthly_expenses,
+          variable_expenses: 0,
+          emergency_fund: calculationData.emergency_fund_target,
+          total_debt: 0,
+          credit_score: 0,
+          age: 30
+        }),
+        recommendations: []
+      }
+      
+      setCalculation(calculation)
       toast.success('Calculation completed!')
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Failed to calculate safe spending')

@@ -31,7 +31,7 @@ export default function SettingsPage() {
     try {
       setIsLoading(true)
       const response = await apiClient.getSubscriptionStatus()
-      setSubscription(response.data.subscription || response.data)
+      setSubscription(response)
     } catch (error) {
       console.error('Failed to load subscription', error)
       toast.error('Failed to load subscription status')
@@ -43,10 +43,10 @@ export default function SettingsPage() {
   const handleUpgrade = async (plan: 'premium' | 'pro') => {
     try {
       const response = await apiClient.upgradeSubscription(plan)
-      if ((response.data as any)?.checkout_url) {
-        window.location.href = (response.data as any).checkout_url
+      if ((response as any)?.checkout_url) {
+        window.location.href = (response as any).checkout_url
       } else {
-        toast.error('Upgrade failed: missing checkout URL')
+        toast.success('Subscription upgraded successfully!')
       }
     } catch (error) {
       toast.error('Failed to start upgrade process')

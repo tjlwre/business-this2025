@@ -40,11 +40,11 @@ export default function RegisterPage() {
         password: formData.password,
       })
 
-      if (response.data.success) {
+      if (response.success) {
         toast.success('Account created successfully! Please sign in.')
         router.push('/auth/login')
       } else {
-        toast.error(response.data.message || 'Registration failed')
+        toast.error('Registration failed')
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Something went wrong. Please try again.')

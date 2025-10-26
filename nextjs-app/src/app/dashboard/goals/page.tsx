@@ -63,7 +63,7 @@ export default function GoalsPage() {
     try {
       setIsLoading(true)
       const response = await apiClient.getSavingsGoals()
-      setGoals(response.data.goals || [])
+      setGoals(response.data || [])
     } catch (error) {
       console.error('Error loading goals:', error)
       toast.error('Failed to load savings goals')
