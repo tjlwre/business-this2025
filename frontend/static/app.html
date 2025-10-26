@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusinessThis App - Financial Planning Dashboard</title>
+    <meta name="description" content="Access your BusinessThis financial planning dashboard. Calculate safe spending, track goals, and manage your finances.">
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --primary-blue-light: #1e40af;
+            --primary-green: #065f46;
+            --primary-green-light: #047857;
+            --accent-gold: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: var(--text-light);
+            font-size: 1.125rem;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .calculator-form {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .calculator-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-light) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-card p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background: var(--bg-light);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-item h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-green) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .calculator-content {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fas fa-chart-line"></i>
+                BusinessThis
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <div class="user-menu">
+                <div class="user-avatar">JD</div>
+                <span>John Doe</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1>Welcome to BusinessThis</h1>
+            <p>Take control of your financial future with our smart planning tools</p>
+        </div>
+
+        <!-- Dashboard Metrics -->
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Financial Health Score</h3>
+                <div class="metric-value">85</div>
+                <div class="metric-label">Out of 100</div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Safe Daily Spend</h3>
+                <div class="metric-value">$46.67</div>
+                <div class="metric-label">Per day</div>
+            </div>
+            <div class="dashboard-card">
+                <h3>Savings Progress</h3>
+                <div class="metric-value">$8,500</div>
+                <div class="metric-label">Of $12,000 goal</div>
+            </div>
+        </div>
+
+        <!-- Calculator Section -->
+        <div class="calculator-section">
+            <div class="calculator-header">
+                <h2>Safe Spending Calculator</h2>
+                <p>Calculate how much you can safely spend each day while reaching your financial goals</p>
+            </div>
+            
+            <div class="calculator-content">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="income">Monthly Income ($)</label>
+                        <input type="number" id="income" value="5000" min="0" step="100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fixed">Fixed Expenses ($)</label>
+                        <input type="number" id="fixed" value="2000" min="0" step="50">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="variable">Variable Expenses ($)</label>
+                        <input type="number" id="variable" value="800" min="0" step="50">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal">Savings Goal ($)</label>
+                        <input type="number" id="goal" value="12000" min="0" step="1000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="months">Months to Reach Goal</label>
+                        <input type="number" id="months" value="12" min="1" step="1">
+                    </div>
+                    
+                    <button class="calculate-btn" onclick="calculate()">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Safe Spending
+                    </button>
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="result-card">
+                        <h4>Daily Safe Spend</h4>
+                        <div class="amount" id="daily-result">$46.67</div>
+                        <p>Per day</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>Weekly Safe Spend</h4>
+                        <div class="amount" id="weekly-result">$326.67</div>
+                        <p>Per week</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h4>Monthly Safe Spend</h4>
+                        <div class="amount" id="monthly-result">$1,400.00</div>
+                        <p>Per month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem; font-weight: 700; color: var(--text-dark);">Available Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h4>Smart Calculator</h4>
+                    <p>Calculate your safe daily spending amount based on your financial situation</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <h4>Savings Goals</h4>
+                    <p>Set and track multiple savings goals with progress monitoring</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Analytics</h4>
+                    <p>Get detailed insights into your financial health and spending patterns</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>AI Coaching</h4>
+                    <p>Get personalized financial advice from our AI-powered coach</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Upgrade?</h2>
+            <p>Unlock advanced features and take your financial planning to the next level</p>
+            <div class="cta-buttons">
+                <a href="/pricing" class="btn-primary">
+                    <i class="fas fa-credit-card"></i>
+                    View Pricing Plans
+                </a>
+                <a href="/contact" class="btn-secondary">
+                    <i class="fas fa-envelope"></i>
+                    Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const fixed = parseFloat(document.getElementById('fixed').value) || 0;
+            const variable = parseFloat(document.getElementById('variable').value) || 0;
+            const goal = parseFloat(document.getElementById('goal').value) || 0;
+            const months = parseInt(document.getElementById('months').value) || 1;
+            
+            if (months <= 0) {
+                alert('Months for goal must be positive.');
+                return;
+            }
+            
+            const monthlySavings = goal / months;
+            const monthlyDisposable = income - fixed - monthlySavings;
+            const monthlySafeSpend = monthlyDisposable - variable;
+            const dailySafeSpend = Math.max(0, monthlySafeSpend / 30);
+            const weeklySafeSpend = dailySafeSpend * 7;
+            
+            // Update all result displays
+            document.getElementById('daily-result').textContent = '$' + dailySafeSpend.toFixed(2);
+            document.getElementById('weekly-result').textContent = '$' + weeklySafeSpend.toFixed(2);
+            document.getElementById('monthly-result').textContent = '$' + Math.max(0, monthlySafeSpend).toFixed(2);
+        }
+        
+        // Calculate on page load
+        window.addEventListener('load', calculate);
+        
+        // Add input event listeners for real-time calculation
+        document.querySelectorAll('#income, #fixed, #variable, #goal, #months').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+    </script>
+</body>
+</html>

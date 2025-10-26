@@ -1,0 +1,14 @@
+# Backend dependencies
+-r base.txt
+
+# Flask and web framework
+Flask>=2.3.0
+Flask-CORS>=4.0.0
+Werkzeug>=2.3.0
+
+# Database and authentication
+supabase>=2.0.0
+PyJWT>=2.8.0
+
+# Financial calculations
+decimal
