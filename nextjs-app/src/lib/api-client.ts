@@ -109,7 +109,7 @@ class ApiClient {
     const totalExpenses = fixedExpenses + variableExpenses
     const monthlySavings = monthlyIncome - totalExpenses
     const emergencyTarget = emergencyFund
-    const monthsToEmergency = emergencyTarget / monthlySavings if monthlySavings > 0 else 0
+    const monthsToEmergency = monthlySavings > 0 ? emergencyTarget / monthlySavings : 0
     
     const dailySafeSpend = monthlySavings / 30
     const weeklySafeSpend = monthlySavings / 4.33
@@ -120,7 +120,7 @@ class ApiClient {
       weekly: Math.max(0, weeklySafeSpend),
       monthly: Math.max(0, monthlySafeSpend),
       emergencyMonths: monthsToEmergency,
-      savingsRate: (monthlySavings / monthlyIncome) * 100 if monthlyIncome > 0 else 0
+      savingsRate: monthlyIncome > 0 ? (monthlySavings / monthlyIncome) * 100 : 0
     }
   }
 
